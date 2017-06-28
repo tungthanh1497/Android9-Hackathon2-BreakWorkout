@@ -23,8 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="400px"
         android:layout_below="@+id/tv_name"
-        android:background="#fff"
-        android:src="@drawable/dips" />
+        android:background="#fff"/>
 
 
     <TextView
@@ -72,7 +71,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:background="#CECECE"
-        android:text="Start"
+        android:text="START"
         android:textColor="#1a0d39"
         android:textSize="16sp"
         android:textStyle="bold" />

@@ -49,10 +49,8 @@ public class PracticeScene extends AppCompatActivity implements View.OnClickList
             return;
         tvName.setText(practiceModel.getName());
 
-        String[] image = practiceModel.getImage().split(",");
-        byte[] decodeByte = Base64.decode(image[1], Base64.DEFAULT);
-        Bitmap bitmap = BitmapFactory.decodeByteArray(decodeByte, 0, decodeByte.length);
-        givImage.setImageBitmap(bitmap);
+        int resId = PracticeScene.this.getResources().getIdentifier(practiceModel.getImage(), "drawable", PracticeScene.this.getPackageName());
+        givImage.setImageResource(resId);
 
         tvHow.setText(practiceModel.getHow());
     }
@@ -60,11 +58,13 @@ public class PracticeScene extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         if (v == btStart) {
-            Log.d(TAG, "onClick: jump in");
-            // tvCountDown.setHeight(100);
-            tvCountDown.setVisibility(View.VISIBLE);
-            btStart.setText("STOP");
-            Log.d(TAG, "onClick: successful");
+            if (btStart.getText().equals("START")) {
+                tvCountDown.setVisibility(View.VISIBLE);
+                btStart.setText("STOP");
+            } else {
+                tvCountDown.setVisibility(View.INVISIBLE);
+                btStart.setText("START");
+            }
         }
     }
 }
