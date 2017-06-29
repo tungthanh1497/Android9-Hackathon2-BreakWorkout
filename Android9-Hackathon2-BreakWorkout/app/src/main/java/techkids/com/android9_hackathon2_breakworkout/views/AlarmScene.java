@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import techkids.com.android9_hackathon2_breakworkout.BroadcastService;
@@ -16,8 +17,8 @@ import techkids.com.android9_hackathon2_breakworkout.R;
 import static techkids.com.android9_hackathon2_breakworkout.R.id.donut_progress;
 
 public class AlarmScene extends AppCompatActivity implements View.OnClickListener {
-    TextView tvStart;
-    //    TextView tvStop;
+    Button btStart;
+    Button btStop;
     View donutProgress;
 
     public static String TAG = AlarmScene.class.toString();
@@ -27,11 +28,11 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm_scene);
 
-        tvStart = (TextView) findViewById(R.id.tv_start);
-        tvStart.setOnClickListener(this);
+        btStart = (Button) findViewById(R.id.bt_start);
+        btStart.setOnClickListener(this);
 
-//        tvStop = (TextView) findViewById(R.id.tv_stop);
-//        tvStop.setOnClickListener(this);
+        btStop = (Button) findViewById(R.id.bt_stop);
+        btStop.setOnClickListener(this);
 
         donutProgress = findViewById(donut_progress);
 
@@ -39,15 +40,21 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
-        if (v == tvStart) {
-            if (tvStart.getText().equals("START")) {
-//                tvStart.setText("STOP");
-                startService(new Intent(this, BroadcastService.class));
-                Log.i(TAG, "Started service");
-            } else {
-                tvStart.setText("START");
-            }
+        if (v == btStart) {
+            startService(new Intent(this, BroadcastService.class));
+            Log.i(TAG, "Started service");
+
+            btStop.setVisibility(View.VISIBLE);
+            btStart.setVisibility(View.INVISIBLE);
         }
+        else if(v == btStop) {
+            btStop.setVisibility(View.INVISIBLE);
+            btStart.setVisibility(View.VISIBLE);
+
+            stopService(new Intent(this, BroadcastService.class));
+            Log.i(TAG, "Stopped service");
+        }
+
     }
     private BroadcastReceiver br = new BroadcastReceiver() {
         @Override
@@ -81,8 +88,6 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
     }
     @Override
     public void onDestroy() {
-        stopService(new Intent(this, BroadcastService.class));
-        Log.i(TAG, "Stopped service");
         super.onDestroy();
     }
 

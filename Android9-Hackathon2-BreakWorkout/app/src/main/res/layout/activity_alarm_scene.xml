@@ -13,39 +13,40 @@
         android:layout_width="280dp"
         android:layout_height="280dp"
         android:layout_centerHorizontal="true"
+        app:donut_text=""
         android:layout_marginTop="100dp" />
 
-    <com.spark.submitbutton.SubmitButton
-        android:id="@+id/tv_start"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/donut_progress"
-        android:text="START "
-        android:textColor="@color/gray"
-        app:sub_btn_background="@color/white"
-        android:layout_marginTop="40dp"
+    <Button
+        android:id ="@+id/bt_start"
+        android:layout_below="@+id/donut_progress"
+        android:layout_marginTop="80dp"
         android:layout_centerHorizontal="true"
-        app:sub_btn_duration="3000"
-        android:textSize="18dp"
-        android:fontFamily="sans-serif"
-        app:sub_btn_line_color="@color/green"
-        app:sub_btn_ripple_color="@color/green"
-        app:sub_btn_tick_color="@color/white" />
+        android:layout_width="220dp"
+        android:layout_height="65dp"
+        android:text="START"
+        android:background="@drawable/rounded_button_green"
+        android:translationZ="5dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:padding="15dp"
+        android:elevation="4dp"
+        />
 
-    <!--<com.spark.submitbutton.SubmitButton-->
-        <!--android:id="@+id/tv_stop"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_below="@id/donut_progress"-->
-        <!--android:text="STOP "-->
-        <!--android:textColor="@color/gray"-->
-        <!--app:sub_btn_background="@color/white"-->
-        <!--android:layout_marginTop="40dp"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--app:sub_btn_duration="3000"-->
-        <!--android:textSize="18dp"-->
-        <!--android:fontFamily="sans-serif"-->
-        <!--app:sub_btn_line_color="@color/colorAccent"-->
-        <!--app:sub_btn_ripple_color="@color/colorAccent"-->
-        <!--app:sub_btn_tick_color="@color/white" />-->
+    <Button
+        android:id ="@+id/bt_stop"
+        android:layout_below="@+id/donut_progress"
+        android:layout_marginTop="80dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="220dp"
+        android:layout_height="65dp"
+        android:text="STOP"
+        android:background="@drawable/rounded_button_red"
+        android:padding="15dp"
+        android:translationZ="5dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:visibility="invisible"
+        />
 </RelativeLayout>
