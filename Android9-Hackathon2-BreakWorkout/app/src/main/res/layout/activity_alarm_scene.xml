@@ -7,23 +7,45 @@
     android:background="#1a0d39"
     tools:context="techkids.com.android9_hackathon2_breakworkout.views.PracticeScene">
 
-    <ImageView
-        android:id="@+id/iv_alarm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <com.github.lzyzsd.circleprogress.DonutProgress
+        android:layout_marginLeft="50dp"
+        android:id="@+id/donut_progress"
+        android:layout_width="280dp"
+        android:layout_height="280dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
-        android:src="@drawable/shapes"/>
+        android:layout_marginTop="100dp" />
 
-    <Button
-        android:id="@+id/bt_start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <com.spark.submitbutton.SubmitButton
+        android:id="@+id/tv_start"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/donut_progress"
+        android:text="START "
+        android:textColor="@color/gray"
+        app:sub_btn_background="@color/white"
+        android:layout_marginTop="40dp"
         android:layout_centerHorizontal="true"
-        android:width="250dp"
-        android:layout_marginTop="70dp"
-        android:layout_below="@+id/iv_alarm"
-        android:text="start"
-        />
+        app:sub_btn_duration="3000"
+        android:textSize="18dp"
+        android:fontFamily="sans-serif"
+        app:sub_btn_line_color="@color/green"
+        app:sub_btn_ripple_color="@color/green"
+        app:sub_btn_tick_color="@color/white" />
 
+    <!--<com.spark.submitbutton.SubmitButton-->
+        <!--android:id="@+id/tv_stop"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_below="@id/donut_progress"-->
+        <!--android:text="STOP "-->
+        <!--android:textColor="@color/gray"-->
+        <!--app:sub_btn_background="@color/white"-->
+        <!--android:layout_marginTop="40dp"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--app:sub_btn_duration="3000"-->
+        <!--android:textSize="18dp"-->
+        <!--android:fontFamily="sans-serif"-->
+        <!--app:sub_btn_line_color="@color/colorAccent"-->
+        <!--app:sub_btn_ripple_color="@color/colorAccent"-->
+        <!--app:sub_btn_tick_color="@color/white" />-->
 </RelativeLayout>
