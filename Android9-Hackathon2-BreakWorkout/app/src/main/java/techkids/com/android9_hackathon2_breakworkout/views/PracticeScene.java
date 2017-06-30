@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.github.aakira.expandablelayout.ExpandableWeightLayout;
 import com.github.lzyzsd.circleprogress.CircleProgress;
 import com.skyfishjy.library.RippleBackground;
 
@@ -23,21 +24,23 @@ import techkids.com.android9_hackathon2_breakworkout.R;
 import techkids.com.android9_hackathon2_breakworkout.databases.DatabaseHandle;
 import techkids.com.android9_hackathon2_breakworkout.databases.PracticeModel;
 
-public class PracticeScene extends AppCompatActivity implements View.OnClickListener, View.OnTouchListener {
+public class PracticeScene extends AppCompatActivity implements View.OnTouchListener {
 
     //    TextView tvCountDown;
-    Button btStart;
     RippleBackground rbCounting;
     boolean isRuning = false;
     String TAG = PracticeScene.class.toString();
     TextView tvName;
     GifImageView givImage;
-    TextView tvHow;
+    TextView tvDescription;
+    Button btHow;
     CountDownTimer countDownTimer;
     ImageView ivCenterImage;
     CircleProgress cpCountDown;
+    //    ExpandableWeightLayout expandableLayout;
     long timeEnd = 10000;
     long timeBreak = 100;
+    boolean isOpen = false;
 
 
     @Override
@@ -49,18 +52,18 @@ public class PracticeScene extends AppCompatActivity implements View.OnClickList
         setupUI(DatabaseHandle.getInstance(this).getPractice());
 //        tvCountDown = (TextView) findViewById(R.id.tv_count_down);
         ivCenterImage.setOnTouchListener(this);
-
-
+//        btHow.setOnClickListener(this);
     }
 
     void addVarById() {
-        btStart = (Button) findViewById(R.id.bt_start);
         ivCenterImage = (ImageView) findViewById(R.id.iv_center_image);
         tvName = (TextView) findViewById(R.id.tv_name);
         givImage = (GifImageView) findViewById(R.id.giv_image);
-        tvHow = (TextView) findViewById(R.id.tv_description);
+        tvDescription = (TextView) findViewById(R.id.tv_description);
         rbCounting = (RippleBackground) findViewById(R.id.rb_counting);
         cpCountDown = (CircleProgress) findViewById(R.id.cp_count_down);
+        btHow = (Button) findViewById(R.id.bt_how);
+//        expandableLayout = (ExpandableWeightLayout) findViewById(R.id.expandableLayout);
     }
 
     void setupUI(PracticeModel practiceModel) {
@@ -69,44 +72,7 @@ public class PracticeScene extends AppCompatActivity implements View.OnClickList
         tvName.setText(practiceModel.getName());
         int resId = PracticeScene.this.getResources().getIdentifier(practiceModel.getImage(), "drawable", PracticeScene.this.getPackageName());
         givImage.setImageResource(resId);
-        tvHow.setText(practiceModel.getHow());
-    }
-
-    @Override
-    public void onClick(View v) {
-        if (v == btStart) {
-            if (btStart.getText().equals("START")) {
-//                tvCountDown.setVisibility(View.VISIBLE);
-                btStart.setText("STOP");
-
-
-                countDownTimer = new CountDownTimer(5000, 1000) {
-
-                    public void onTick(long millisUntilFinished) {
-                        if (isRuning) return;
-                        isRuning = true;
-//                        tvCountDown.setText("seconds remaining: " + millisUntilFinished / 1000);
-                        //here you can have your logic to set text to edittext
-                        rbCounting.startRippleAnimation();
-                    }
-
-                    public void onFinish() {
-                        isRuning = false;
-                        rbCounting.stopRippleAnimation();
-//                        tvCountDown.setText("done!");
-                        startActivity(new Intent(PracticeScene.this, FinishScene.class));
-                    }
-
-                }.start();
-
-            } else {
-                isRuning = false;
-                rbCounting.stopRippleAnimation();
-//                tvCountDown.setVisibility(View.INVISIBLE);
-                countDownTimer.cancel();
-                btStart.setText("START");
-            }
-        }
+        tvDescription.setText(practiceModel.getHow());
     }
 
     @Override
@@ -123,6 +89,7 @@ public class PracticeScene extends AppCompatActivity implements View.OnClickList
                 case MotionEvent.ACTION_UP:
                     if (isRuning) {
                         isRuning = false;
+                        cpCountDown.setProgress(100);
                         ivCenterImage.setImageResource(R.drawable.start_button);
                         rbCounting.stopRippleAnimation();
                         countDownTimer.cancel();
@@ -135,7 +102,7 @@ public class PracticeScene extends AppCompatActivity implements View.OnClickList
                                     isRuning = true;
                                     rbCounting.startRippleAnimation();
                                 }
-                                int percent = (int) ((int)(millisUntilFinished*(timeEnd/timeBreak))/timeEnd);
+                                int percent = (int) ((int) (millisUntilFinished * (timeEnd / timeBreak)) / timeEnd);
                                 cpCountDown.setProgress(percent);
                                 Log.d(TAG, "onTick: millisUntilFinished: " + millisUntilFinished + " - percent: " + percent);
                             }
@@ -156,4 +123,22 @@ public class PracticeScene extends AppCompatActivity implements View.OnClickList
 
         return false;
     }
+
+
+//    @Override
+//    public void onClick(View v) {
+//        if (v == btHow) {
+////            if (isOpen) {
+////                Log.d(TAG, "onClick: open -> close");
+////                isOpen = false;
+////                expandableLayout.collapse();
+////            } else {
+////                Log.d(TAG, "onClick: close -> open");
+////                isOpen = true;
+////                expandableLayout.expand();
+////
+////            }
+//            expandableLayout.toggle();
+//        }
+//    }
 }

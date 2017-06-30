@@ -99,9 +99,10 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
             time = Integer.parseInt(editTextMinute.getText().toString().trim());
         }
           else {
-            Toast.makeText(getApplicationContext(), getString(R.string.message_minutes), Toast.LENGTH_LONG).show();
+//            Toast.makeText(getApplicationContext(), getString(R.string.message_minutes), Toast.LENGTH_LONG).show();
         }
-        timeCountInMilliSeconds = time * 60 * 1000;
+        // TODO: timeCountInMilliSeconds = time * 60 * 1000;
+        timeCountInMilliSeconds = time * 60 * 100;
     }
 
 
@@ -119,14 +120,13 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
 
             @Override
             public void onFinish() {
-
-                textViewTime.setText(hmsTimeFormatter(timeCountInMilliSeconds));
-                setProgressBarValues();
-                btStartStop.setText("START");
-                btStartStop.setBackgroundResource(R.drawable.rounded_button_green);
-                editTextMinute.setEnabled(true);
-                timerStatus = TimerStatus.STOPPED;
                 startActivity(new Intent(AlarmScene.this, PracticeScene.class));
+//                textViewTime.setText(hmsTimeFormatter(timeCountInMilliSeconds));
+//                setProgressBarValues();
+//                btStartStop.setText("START");
+//                btStartStop.setBackgroundResource(R.drawable.rounded_button_green);
+//                editTextMinute.setEnabled(true);
+//                timerStatus = TimerStatus.STOPPED;
             }
 
         }.start();
