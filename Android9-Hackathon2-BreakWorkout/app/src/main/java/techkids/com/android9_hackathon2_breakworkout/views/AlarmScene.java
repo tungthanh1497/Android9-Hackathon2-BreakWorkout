@@ -1,5 +1,6 @@
 package techkids.com.android9_hackathon2_breakworkout.views;
 
+import android.content.Intent;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -125,6 +126,7 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
                 btStartStop.setBackgroundResource(R.drawable.rounded_button_green);
                 editTextMinute.setEnabled(true);
                 timerStatus = TimerStatus.STOPPED;
+                startActivity(new Intent(AlarmScene.this, PracticeScene.class));
             }
 
         }.start();
