@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorAccent"
+    android:background="#1a0d39"
     tools:context="techkids.com.android9_hackathon2_breakworkout.views.PracticeScene">
 
     <ProgressBar
