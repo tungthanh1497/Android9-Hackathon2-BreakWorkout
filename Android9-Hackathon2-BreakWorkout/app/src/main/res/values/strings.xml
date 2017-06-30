@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Android9-Hackathon2-BreakWorkout</string>
+    <string name="title_activity_finish_scene">FinishScene</string>
 </resources>
