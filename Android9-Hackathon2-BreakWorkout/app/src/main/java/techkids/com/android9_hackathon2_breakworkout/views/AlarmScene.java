@@ -1,100 +1,160 @@
 package techkids.com.android9_hackathon2_breakworkout.views;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import techkids.com.android9_hackathon2_breakworkout.BroadcastService;
+import java.util.concurrent.TimeUnit;
+
 import techkids.com.android9_hackathon2_breakworkout.R;
 
-import static techkids.com.android9_hackathon2_breakworkout.R.id.donut_progress;
-
 public class AlarmScene extends AppCompatActivity implements View.OnClickListener {
-    Button btStart;
-    Button btStop;
-    View donutProgress;
+    private ProgressBar progressBarCircle;
+    private EditText editTextMinute;
+    private TextView textViewTime;
+    private Button btStartStop;
+    private CountDownTimer countDownTimer;
 
     public static String TAG = AlarmScene.class.toString();
+
+    private long timeCountInMilliSeconds = 1 * 60000;
+
+    private enum TimerStatus {
+        STARTED,
+        STOPPED
+    }
+
+    private TimerStatus timerStatus = TimerStatus.STOPPED;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm_scene);
 
-        btStart = (Button) findViewById(R.id.bt_start);
-        btStart.setOnClickListener(this);
-
-        btStop = (Button) findViewById(R.id.bt_stop);
-        btStop.setOnClickListener(this);
-
-        donutProgress = findViewById(donut_progress);
+        initViews();
+        initListeners();
 
     }
+
+    private void initViews() {
+        progressBarCircle = (ProgressBar) findViewById(R.id.progressBarCircle);
+        editTextMinute = (EditText) findViewById(R.id.editTextMinute);
+        textViewTime = (TextView) findViewById(R.id.textViewTime);
+        btStartStop = (Button) findViewById(R.id.imageViewStartStop);
+    }
+
+   private void initListeners() {
+        btStartStop.setOnClickListener(this);
+    }
+
 
     @Override
-    public void onClick(View v) {
-        if (v == btStart) {
-            startService(new Intent(this, BroadcastService.class));
-            Log.i(TAG, "Started service");
-
-            btStop.setVisibility(View.VISIBLE);
-            btStart.setVisibility(View.INVISIBLE);
-        }
-        else if(v == btStop) {
-            btStop.setVisibility(View.INVISIBLE);
-            btStart.setVisibility(View.VISIBLE);
-
-            stopService(new Intent(this, BroadcastService.class));
-            Log.i(TAG, "Stopped service");
-        }
-
-    }
-    private BroadcastReceiver br = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            updateGUI(intent);
-        }
-    };
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        registerReceiver(br, new IntentFilter(BroadcastService.COUNTDOWN_BR));
-        Log.i(TAG, "Registered broacast receiver");
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        unregisterReceiver(br);
-        Log.i(TAG, "Unregistered broacast receiver");
-    }
-
-    @Override
-    public void onStop() {
-        try {
-            unregisterReceiver(br);
-        } catch (Exception e) {
-            // Receiver was probably already stopped in onPause()
-        }
-        super.onStop();
-    }
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
-    private void updateGUI(Intent intent) {
-        if (intent.getExtras() != null) {
-            long millisUntilFinished = intent.getLongExtra("countdown", 0);
-            Log.i(TAG, "Countdown seconds remaining: " +  millisUntilFinished / 1000);
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.imageViewStartStop:
+                startStop();
+                break;
         }
     }
+
+    private void startStop() {
+        if (timerStatus == TimerStatus.STOPPED) {
+
+            // call to initialize the timer values
+            setTimerValues();
+            // call to initialize the progress bar values
+            setProgressBarValues();
+
+            btStartStop.setText("STOP");
+            btStartStop.setBackgroundResource(R.drawable.rounded_button_red);
+            // making edit text not editable
+            editTextMinute.setEnabled(false);
+            // changing the timer status to started
+            timerStatus = TimerStatus.STARTED;
+            // call to start the count down timer
+            startCountDownTimer();
+
+        } else {
+            btStartStop.setText("START");
+            btStartStop.setBackgroundResource(R.drawable.rounded_button_green);
+            editTextMinute.setEnabled(true);
+            timerStatus = TimerStatus.STOPPED;
+            stopCountDownTimer();
+
+        }
+
+    }
+
+    private void setTimerValues() {
+        int time = 0;
+        if (!editTextMinute.getText().toString().isEmpty()) {
+            time = Integer.parseInt(editTextMinute.getText().toString().trim());
+        }
+          else {
+            Toast.makeText(getApplicationContext(), getString(R.string.message_minutes), Toast.LENGTH_LONG).show();
+        }
+        timeCountInMilliSeconds = time * 60 * 1000;
+    }
+
+
+    private void startCountDownTimer() {
+
+        countDownTimer = new CountDownTimer(timeCountInMilliSeconds, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+                textViewTime.setText(hmsTimeFormatter(millisUntilFinished));
+
+                progressBarCircle.setProgress((int) (millisUntilFinished / 1000));
+
+            }
+
+            @Override
+            public void onFinish() {
+
+                textViewTime.setText(hmsTimeFormatter(timeCountInMilliSeconds));
+                setProgressBarValues();
+                btStartStop.setText("START");
+                btStartStop.setBackgroundResource(R.drawable.rounded_button_green);
+                editTextMinute.setEnabled(true);
+                timerStatus = TimerStatus.STOPPED;
+                startActivity(new Intent(AlarmScene.this, PracticeScene.class));
+            }
+
+        }.start();
+        countDownTimer.start();
+    }
+
+
+    private void stopCountDownTimer() {
+        countDownTimer.cancel();
+    }
+
+
+    private void setProgressBarValues() {
+
+        progressBarCircle.setMax((int) timeCountInMilliSeconds / 1000);
+        progressBarCircle.setProgress((int) timeCountInMilliSeconds / 1000);
+    }
+
+
+    private String hmsTimeFormatter(long milliSeconds) {
+
+        String hms = String.format("%02d:%02d:%02d",
+                TimeUnit.MILLISECONDS.toHours(milliSeconds),
+                TimeUnit.MILLISECONDS.toMinutes(milliSeconds) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(milliSeconds)),
+                TimeUnit.MILLISECONDS.toSeconds(milliSeconds) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(milliSeconds)));
+
+        return hms;
+
+    }
+
 }
