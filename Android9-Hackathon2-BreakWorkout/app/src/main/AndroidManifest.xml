@@ -19,8 +19,6 @@
         <activity android:name=".views.PracticeScene" />
         <activity android:name=".views.AlarmScene" />
 
-        <service android:name=".BroadcastService" />
-
         <activity
             android:name=".views.FinishScene"
             android:label="@string/title_activity_finish_scene"
