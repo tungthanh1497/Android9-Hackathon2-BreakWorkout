@@ -59,13 +59,15 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_centerInParent="true"
-            android:src="@drawable/start_button" />
-        <!--<android.support.v4.widget.CircleImageView-->
-        <!--android:layout_width="70dp"-->
-        <!--android:layout_height="70dp"-->
-        <!--android:layout_centerInParent="true"-->
-        <!--custom:circle_progress="20"-->
-        <!--android:elevation="20dp" />-->
+            android:src="@drawable/start_button"
+            android:elevation="10dp"/>
+
+        <com.github.lzyzsd.circleprogress.CircleProgress
+            android:id="@+id/cp_count_down"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_centerInParent="true"
+            custom:circle_progress="100" />
     </com.skyfishjy.library.RippleBackground>
 
 

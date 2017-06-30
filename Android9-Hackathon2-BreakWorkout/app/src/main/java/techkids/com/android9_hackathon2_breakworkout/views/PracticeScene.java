@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.github.lzyzsd.circleprogress.CircleProgress;
 import com.skyfishjy.library.RippleBackground;
 
 import pl.droidsonroids.gif.GifImageView;
@@ -34,33 +35,40 @@ public class PracticeScene extends AppCompatActivity implements View.OnClickList
     TextView tvHow;
     CountDownTimer countDownTimer;
     ImageView ivCenterImage;
+    CircleProgress cpCountDown;
+    long timeEnd = 10000;
+    long timeBreak = 100;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_practice_scene);
 
+        addVarById();
+        setupUI(DatabaseHandle.getInstance(this).getPractice());
 //        tvCountDown = (TextView) findViewById(R.id.tv_count_down);
+        ivCenterImage.setOnTouchListener(this);
+
+
+    }
+
+    void addVarById() {
         btStart = (Button) findViewById(R.id.bt_start);
         ivCenterImage = (ImageView) findViewById(R.id.iv_center_image);
         tvName = (TextView) findViewById(R.id.tv_name);
         givImage = (GifImageView) findViewById(R.id.giv_image);
         tvHow = (TextView) findViewById(R.id.tv_description);
         rbCounting = (RippleBackground) findViewById(R.id.rb_counting);
-        ivCenterImage.setOnTouchListener(this);
-
-        setupUI(DatabaseHandle.getInstance(this).getPractice());
-
+        cpCountDown = (CircleProgress) findViewById(R.id.cp_count_down);
     }
 
     void setupUI(PracticeModel practiceModel) {
         if (practiceModel == null)
             return;
         tvName.setText(practiceModel.getName());
-
         int resId = PracticeScene.this.getResources().getIdentifier(practiceModel.getImage(), "drawable", PracticeScene.this.getPackageName());
         givImage.setImageResource(resId);
-
         tvHow.setText(practiceModel.getHow());
     }
 
@@ -120,14 +128,21 @@ public class PracticeScene extends AppCompatActivity implements View.OnClickList
                         countDownTimer.cancel();
                     } else {
                         ivCenterImage.setImageResource(R.drawable.stop_button);
-                        countDownTimer = new CountDownTimer(5000, 1000) {
+                        countDownTimer = new CountDownTimer(timeEnd, timeBreak) {
+                            @Override
                             public void onTick(long millisUntilFinished) {
-                                if (isRuning) return;
-                                isRuning = true;
-                                rbCounting.startRippleAnimation();
+                                if (!isRuning) {
+                                    isRuning = true;
+                                    rbCounting.startRippleAnimation();
+                                }
+                                int percent = (int) ((int)(millisUntilFinished*(timeEnd/timeBreak))/timeEnd);
+                                cpCountDown.setProgress(percent);
+                                Log.d(TAG, "onTick: millisUntilFinished: " + millisUntilFinished + " - percent: " + percent);
                             }
 
+                            @Override
                             public void onFinish() {
+                                cpCountDown.setProgress(0);
                                 isRuning = false;
                                 rbCounting.stopRippleAnimation();
                                 startActivity(new Intent(PracticeScene.this, FinishScene.class));
