@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -23,30 +24,56 @@
         android:layout_width="match_parent"
         android:layout_height="400px"
         android:layout_below="@+id/tv_name"
-        android:background="#fff"/>
+        android:background="#fff" />
 
 
-    <TextView
-        android:id="@+id/tv_count_down"
+    <!--<TextView-->
+    <!--android:id="@+id/tv_count_down"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@id/giv_image"-->
+    <!--android:layout_centerHorizontal="true"-->
+    <!--android:background="#CECECE"-->
+    <!--android:gravity="center"-->
+    <!--android:padding="16dp"-->
+    <!--android:text="30"-->
+    <!--android:textColor="#1a0d39"-->
+    <!--android:textSize="30sp"-->
+    <!--android:textStyle="bold"-->
+    <!--android:visibility="invisible" />-->
+
+    <com.skyfishjy.library.RippleBackground xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/rb_counting"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:layout_below="@id/giv_image"
-        android:layout_centerHorizontal="true"
-        android:background="#CECECE"
-        android:gravity="center"
-        android:padding="16dp"
-        android:text="30"
-        android:textColor="#1a0d39"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:visibility="invisible" />
+        app:rb_color="#0099CC"
+        app:rb_duration="3000"
+        app:rb_radius="32dp"
+        app:rb_rippleAmount="4"
+        app:rb_scale="6">
+
+        <ImageView
+            android:id="@+id/iv_center_image"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/start_button" />
+        <!--<android.support.v4.widget.CircleImageView-->
+        <!--android:layout_width="70dp"-->
+        <!--android:layout_height="70dp"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--custom:circle_progress="20"-->
+        <!--android:elevation="20dp" />-->
+    </com.skyfishjy.library.RippleBackground>
 
 
     <TextView
         android:id="@+id/tv_how"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_count_down"
+        android:layout_below="@+id/rb_counting"
         android:background="@color/colorPrimary"
         android:gravity="center"
         android:text="How to do"
