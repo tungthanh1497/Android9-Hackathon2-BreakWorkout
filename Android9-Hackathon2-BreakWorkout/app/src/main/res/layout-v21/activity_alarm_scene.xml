@@ -7,16 +7,11 @@
     android:background="#1a0d39"
     tools:context="techkids.com.android9_hackathon2_breakworkout.views.PracticeScene">
 
-    <!--<com.github.lzyzsd.circleprogress.DonutProgress-->
-        <!--android:layout_marginLeft="50dp"-->
-        <!--android:id="@+id/donut_progress"-->
-        <!--android:layout_width="280dp"-->
-        <!--android:layout_height="280dp"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:layout_marginTop="100dp" />-->
     <ProgressBar
         android:id="@+id/progress_bar"
-        style="@android:style/Widget.Material.Light.ProgressBar.Inverse"
+        android:indeterminate="false"
+        android:max="10"
+        style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="3000dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
@@ -31,7 +26,7 @@
         android:layout_centerVertical="true"
         android:text="50:00"
         android:textSize="60dp"
-        />
+         />
 
     <Button
         android:id ="@+id/bt_start"
@@ -52,6 +47,9 @@
 
     <Button
         android:id ="@+id/bt_stop"
+        android:layout_below="@+id/progress_bar"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"
         android:layout_width="230dp"
         android:layout_height="55dp"
         android:text="STOP"
@@ -63,7 +61,5 @@
         android:focusableInTouchMode="true"
         android:visibility="invisible"
         android:elevation="4dp"
-        android:layout_alignBaseline="@+id/bt_start"
-        android:layout_alignBottom="@+id/bt_start"
-        android:layout_alignStart="@+id/bt_start" />
+        />
 </RelativeLayout>

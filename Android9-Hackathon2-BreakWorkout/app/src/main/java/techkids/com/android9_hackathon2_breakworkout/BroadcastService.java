@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.util.Log;
+import android.widget.TextView;
+
+import techkids.com.android9_hackathon2_breakworkout.views.AlarmScene;
 
 public class BroadcastService extends Service {
 
@@ -14,6 +17,8 @@ public class BroadcastService extends Service {
     Intent bi = new Intent(COUNTDOWN_BR);
 
     CountDownTimer cdt = null;
+
+    TextView tvTimer;
 
     @Override
     public void onCreate() {
@@ -26,6 +31,7 @@ public class BroadcastService extends Service {
             public void onTick(long millisUntilFinished) {
 
                 Log.i(TAG, "Countdown seconds remaining: " + millisUntilFinished / 1000);
+//                AlarmScene.tvTimer.setText((int) millisUntilFinished); // <---- LỖI CHỖ NÀY NÀY!!!
                 bi.putExtra("countdown", millisUntilFinished);
                 sendBroadcast(bi);
             }
