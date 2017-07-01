@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="#296562"
     tools:context="techkids.com.android9_hackathon2_breakworkout.views.PracticeScene">
 
     <ProgressBar
@@ -33,8 +33,8 @@
         android:maxLines="1"
         android:minEms="5"
         android:text="50"
-        android:textColor="@color/colorYellow"
-        android:textColorHint="@color/colorYellow" />
+        android:textColor="#14CCBF"
+        android:textColorHint="@color/gray" />
 
     <TextView
         android:id="@+id/textViewTime"
@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="00:50:00"
-        android:textColor="@color/colorYellow"
+        android:textColor="#14CCBF"
         android:textSize="40sp" />
 
     <Button

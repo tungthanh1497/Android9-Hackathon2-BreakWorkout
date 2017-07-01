@@ -81,20 +81,20 @@ public class PracticeScene extends AppCompatActivity implements View.OnTouchList
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
                     if (isRuning) {
-                        ivCenterImage.setImageResource(R.drawable.stop_button_clicked);
+                        ivCenterImage.setImageResource(R.drawable.untitled5_clicked);
                     } else {
-                        ivCenterImage.setImageResource(R.drawable.start_button_clicked);
+                        ivCenterImage.setImageResource(R.drawable.untitled4_clicked);
                     }
                     break;
                 case MotionEvent.ACTION_UP:
                     if (isRuning) {
                         isRuning = false;
                         cpCountDown.setProgress(100);
-                        ivCenterImage.setImageResource(R.drawable.start_button);
+                        ivCenterImage.setImageResource(R.drawable.untitled42);
                         rbCounting.stopRippleAnimation();
                         countDownTimer.cancel();
                     } else {
-                        ivCenterImage.setImageResource(R.drawable.stop_button);
+                        ivCenterImage.setImageResource(R.drawable.untitled52);
                         countDownTimer = new CountDownTimer(timeEnd, timeBreak) {
                             @Override
                             public void onTick(long millisUntilFinished) {

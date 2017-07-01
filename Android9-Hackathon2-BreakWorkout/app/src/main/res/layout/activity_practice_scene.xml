@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1a0d39"
+    android:background="#296562"
     tools:context="techkids.com.android9_hackathon2_breakworkout.views.PracticeScene">
 
     <TextView
@@ -13,7 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:background="@color/colorAccent"
+        android:background="#14CCBF"
+        android:textColor="#fff"
         android:gravity="center"
         android:text="Name of practice"
         android:textSize="32sp"
@@ -48,7 +49,7 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_below="@id/giv_image"
-        app:rb_color="@color/colorYellow"
+        app:rb_color="#51CCC3"
         app:rb_duration="3000"
         app:rb_radius="32dp"
         app:rb_rippleAmount="4"
@@ -56,19 +57,19 @@
 
         <ImageView
             android:id="@+id/iv_center_image"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
             android:layout_centerInParent="true"
             android:elevation="10dp"
-            android:src="@drawable/start_button" />
+            android:src="@drawable/untitled42" />
 
         <com.github.lzyzsd.circleprogress.CircleProgress
             android:id="@+id/cp_count_down"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_centerInParent="true"
-            app:circle_finished_color="@color/green"
-            app:circle_unfinished_color="#CF0000"
+            app:circle_finished_color="#007F2E"
+            app:circle_unfinished_color="#7F2042"
             custom:circle_progress="100" />
     </com.skyfishjy.library.RippleBackground>
 
@@ -88,7 +89,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/rb_counting"
-        android:background="@color/colorPrimary"
+        android:background="#14CCBF"
         android:text="How to do"
         android:textColor="#fff"
         android:textSize="24sp"
