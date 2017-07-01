@@ -96,13 +96,14 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
     private void setTimerValues() {
         int time = 0;
         if (!editTextMinute.getText().toString().isEmpty()) {
+            // fetching value from edit text and type cast to integer
             time = Integer.parseInt(editTextMinute.getText().toString().trim());
+        } else {
+            // toast message to fill edit text
+            Toast.makeText(getApplicationContext(), getString(R.string.message_minutes), Toast.LENGTH_LONG).show();
         }
-          else {
-//            Toast.makeText(getApplicationContext(), getString(R.string.message_minutes), Toast.LENGTH_LONG).show();
-        }
-        // TODO: timeCountInMilliSeconds = time * 60 * 1000;
-        timeCountInMilliSeconds = time * 60 * 100;
+        // assigning values after converting to milliseconds
+        timeCountInMilliSeconds = time * 60 * 1000;
     }
 
 
@@ -126,7 +127,7 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
 //                btStartStop.setText("START");
 //                btStartStop.setBackgroundResource(R.drawable.rounded_button_green);
 //                editTextMinute.setEnabled(true);
-//                timerStatus = TimerStatus.STOPPED;
+                timerStatus = TimerStatus.STOPPED;
             }
 
         }.start();
