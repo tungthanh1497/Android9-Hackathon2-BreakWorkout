@@ -130,7 +130,7 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
             }
 
         }.start();
-        countDownTimer.start();
+//        countDownTimer.start();
     }
 
 
