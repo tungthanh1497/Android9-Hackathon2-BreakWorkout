@@ -35,7 +35,7 @@ public class FinishScene extends AppCompatActivity {
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     public void run() {
-                        startActivity(new Intent(FinishScene.this, PracticeScene.class));
+                        startActivity(new Intent(FinishScene.this, AlarmScene.class));
                     }
                 }, 1000);
             }
