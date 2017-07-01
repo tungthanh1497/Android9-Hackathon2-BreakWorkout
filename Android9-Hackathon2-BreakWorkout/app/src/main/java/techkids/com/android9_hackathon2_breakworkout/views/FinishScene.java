@@ -51,7 +51,7 @@ public class FinishScene extends AppCompatActivity implements View.OnTouchListen
         if(v==vBoom && !isclicked){
             switch (event.getAction()){
                 case MotionEvent.ACTION_DOWN:
-                    vBoom.setImageResource(R.drawable.untitled6_clicked);
+                    vBoom.setImageResource(R.drawable.untitled62_clicked);
                     break;
                 case MotionEvent.ACTION_UP:
                     isclicked = true;

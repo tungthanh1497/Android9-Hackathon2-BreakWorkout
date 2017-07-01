@@ -81,9 +81,9 @@ public class PracticeScene extends AppCompatActivity implements View.OnTouchList
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
                     if (isRuning) {
-                        ivCenterImage.setImageResource(R.drawable.untitled5_clicked);
+                        ivCenterImage.setImageResource(R.drawable.untitled52_clicked);
                     } else {
-                        ivCenterImage.setImageResource(R.drawable.untitled4_clicked);
+                        ivCenterImage.setImageResource(R.drawable.untitled42_clicked);
                     }
                     break;
                 case MotionEvent.ACTION_UP:
