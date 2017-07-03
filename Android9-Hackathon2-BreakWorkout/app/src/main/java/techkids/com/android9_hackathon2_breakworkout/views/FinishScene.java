@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -13,7 +14,7 @@ import android.widget.Toast;
 import techkids.com.android9_hackathon2_breakworkout.R;
 import tyrantgit.explosionfield.ExplosionField;
 
-public class FinishScene extends AppCompatActivity {
+public class FinishScene extends AppCompatActivity implements View.OnTouchListener {
 
     ImageView vBoom;
     boolean isclicked = false;
@@ -41,6 +42,31 @@ public class FinishScene extends AppCompatActivity {
             }
         });
 
+        vBoom.setOnTouchListener(this);
+
     }
 
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        if(v==vBoom && !isclicked){
+            switch (event.getAction()){
+                case MotionEvent.ACTION_DOWN:
+                    vBoom.setImageResource(R.drawable.untitled62_clicked);
+                    break;
+                case MotionEvent.ACTION_UP:
+                    isclicked = true;
+                    vBoom.setImageResource(R.drawable.untitled62);
+                    ExplosionField explosionField = ExplosionField.attach2Window((Activity) context);
+                    explosionField.explode(vBoom);
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        public void run() {
+                            startActivity(new Intent(FinishScene.this, AlarmScene.class));
+                        }
+                    }, 1000);
+                    break;
+            }
+        }
+        return false;
+    }
 }

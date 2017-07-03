@@ -51,7 +51,7 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
         btStartStop = (Button) findViewById(R.id.imageViewStartStop);
     }
 
-   private void initListeners() {
+    private void initListeners() {
         btStartStop.setOnClickListener(this);
     }
 
@@ -103,6 +103,7 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
             Toast.makeText(getApplicationContext(), getString(R.string.message_minutes), Toast.LENGTH_LONG).show();
         }
         // assigning values after converting to milliseconds
+        //TODO: timeCountInMilliSeconds = time * 60 * 1000;
         timeCountInMilliSeconds = time * 60 * 1000;
     }
 
