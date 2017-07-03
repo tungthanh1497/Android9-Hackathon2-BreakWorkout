@@ -17,7 +17,7 @@
         android:max="100"
         android:progress="100"
         android:progressDrawable="@drawable/drawable_circle_custom"
-        android:rotation="-90" />
+        android:rotation="0" />
 
     <EditText
         android:id="@+id/editTextMinute"
