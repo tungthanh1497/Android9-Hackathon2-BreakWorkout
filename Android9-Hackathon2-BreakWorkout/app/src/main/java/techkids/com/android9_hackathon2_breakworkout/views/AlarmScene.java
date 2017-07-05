@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 
 import techkids.com.android9_hackathon2_breakworkout.R;
 
-public class AlarmScene extends AppCompatActivity implements View.OnClickListener {
+public class AlarmScene extends AppCompatActivity implements View.OnClickListener, TextWatcher {
     private ProgressBar progressBarCircle;
     private EditText editTextMinute;
     private TextView textViewTime;
@@ -26,6 +28,26 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
     public static String TAG = AlarmScene.class.toString();
 
     private long timeCountInMilliSeconds = 0;
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+        try {
+            int numberInput = Integer.parseInt(s.toString());
+            textViewTime.setText(hmsTimeFormatter(numberInput * 60 * 100));
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(), getString(R.string.message_minutes), Toast.LENGTH_LONG).show();
+        }
+    }
 
     private enum TimerStatus {
         STARTED,
@@ -53,6 +75,7 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
 
     private void initListeners() {
         btStartStop.setOnClickListener(this);
+        editTextMinute.addTextChangedListener(this);
     }
 
 
@@ -106,12 +129,13 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
             } else {
                 // assigning values after converting to milliseconds
                 //TODO: timeCountInMilliSeconds = time * 60 * 1000;
-                timeCountInMilliSeconds = time * 60 * 100;
+                timeCountInMilliSeconds = time * 60 * 1000;
             }
-        } else {
-            // toast message to fill edit text
-            Toast.makeText(getApplicationContext(), getString(R.string.message_minutes), Toast.LENGTH_LONG).show();
         }
+//        else {
+//            // toast message to fill edit text
+//            Toast.makeText(getApplicationContext(), getString(R.string.message_minutes), Toast.LENGTH_LONG).show();
+//        }
     }
 
 
