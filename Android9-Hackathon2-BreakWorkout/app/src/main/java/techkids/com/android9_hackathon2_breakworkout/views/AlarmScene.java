@@ -25,7 +25,7 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
 
     public static String TAG = AlarmScene.class.toString();
 
-    private long timeCountInMilliSeconds = 1 * 60000;
+    private long timeCountInMilliSeconds = 0;
 
     private enum TimerStatus {
         STARTED,
@@ -70,6 +70,11 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
 
             // call to initialize the timer values
             setTimerValues();
+            if (timeCountInMilliSeconds == 0)
+                return;
+
+            // call to start the count down timer
+            startCountDownTimer();
             // call to initialize the progress bar values
             setProgressBarValues();
 
@@ -79,8 +84,6 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
             editTextMinute.setEnabled(false);
             // changing the timer status to started
             timerStatus = TimerStatus.STARTED;
-            // call to start the count down timer
-            startCountDownTimer();
 
         } else {
             btStartStop.setText("START");
@@ -98,13 +101,17 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
         if (!editTextMinute.getText().toString().isEmpty()) {
             // fetching value from edit text and type cast to integer
             time = Integer.parseInt(editTextMinute.getText().toString().trim());
+            if (time <= 0) {
+                Toast.makeText(getApplicationContext(), "The input timer must be greater than Zero.", Toast.LENGTH_LONG).show();
+            } else {
+                // assigning values after converting to milliseconds
+                //TODO: timeCountInMilliSeconds = time * 60 * 1000;
+                timeCountInMilliSeconds = time * 60 * 100;
+            }
         } else {
             // toast message to fill edit text
             Toast.makeText(getApplicationContext(), getString(R.string.message_minutes), Toast.LENGTH_LONG).show();
         }
-        // assigning values after converting to milliseconds
-        //TODO: timeCountInMilliSeconds = time * 60 * 1000;
-        timeCountInMilliSeconds = time * 60 * 1000;
     }
 
 
@@ -159,4 +166,12 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
 
     }
 
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        startActivity(intent);
+    }
 }

@@ -125,20 +125,11 @@ public class PracticeScene extends AppCompatActivity implements View.OnTouchList
     }
 
 
-//    @Override
-//    public void onClick(View v) {
-//        if (v == btHow) {
-////            if (isOpen) {
-////                Log.d(TAG, "onClick: open -> close");
-////                isOpen = false;
-////                expandableLayout.collapse();
-////            } else {
-////                Log.d(TAG, "onClick: close -> open");
-////                isOpen = true;
-////                expandableLayout.expand();
-////
-////            }
-//            expandableLayout.toggle();
-//        }
-//    }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        startActivity(intent);
+    }
 }
