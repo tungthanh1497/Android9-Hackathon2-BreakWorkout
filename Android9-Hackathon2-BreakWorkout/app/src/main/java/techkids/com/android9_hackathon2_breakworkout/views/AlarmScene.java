@@ -124,7 +124,6 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
         if (!editTextMinute.getText().toString().isEmpty()) {
             // fetching value from edit text and type cast to integer
             time = Integer.parseInt(editTextMinute.getText().toString().trim());
-<<<<<<< HEAD
             textViewTime.setText(hmsTimeFormatter(timeCountInMilliSeconds));  //<------
         }
 
@@ -138,7 +137,6 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
         }
         // assigning values after converting to milliseconds
         timeCountInMilliSeconds = time * 60 * 1000;
-=======
             if (time <= 0) {
                 Toast.makeText(getApplicationContext(), "The input timer must be greater than Zero.", Toast.LENGTH_LONG).show();
             } else {
@@ -151,8 +149,7 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
 //            // toast message to fill edit text
 //            Toast.makeText(getApplicationContext(), getString(R.string.message_minutes), Toast.LENGTH_LONG).show();
 //        }
->>>>>>> 357a76dd212dec9e0942bb380ef7bf476c3c0844
-    }
+
 
 
     private void startCountDownTimer() {
