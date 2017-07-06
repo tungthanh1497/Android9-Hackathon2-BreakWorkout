@@ -98,12 +98,18 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
         if (!editTextMinute.getText().toString().isEmpty()) {
             // fetching value from edit text and type cast to integer
             time = Integer.parseInt(editTextMinute.getText().toString().trim());
-        } else {
+            textViewTime.setText(hmsTimeFormatter(timeCountInMilliSeconds));  //<------
+        }
+
+//        else if(editTextMinute.getText().toString().equals("0")){
+//            Toast.makeText(getApplicationContext(), "Minutes must be greater than 0", Toast.LENGTH_LONG).show();
+//        }
+
+        else {
             // toast message to fill edit text
             Toast.makeText(getApplicationContext(), getString(R.string.message_minutes), Toast.LENGTH_LONG).show();
         }
         // assigning values after converting to milliseconds
-        //TODO: timeCountInMilliSeconds = time * 60 * 1000;
         timeCountInMilliSeconds = time * 60 * 1000;
     }
 
@@ -113,6 +119,7 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
         countDownTimer = new CountDownTimer(timeCountInMilliSeconds, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
+                editTextMinute.setVisibility(View.INVISIBLE);
 
                 textViewTime.setText(hmsTimeFormatter(millisUntilFinished));
 
@@ -123,11 +130,11 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
             @Override
             public void onFinish() {
                 startActivity(new Intent(AlarmScene.this, PracticeScene.class));
-//                textViewTime.setText(hmsTimeFormatter(timeCountInMilliSeconds));
-//                setProgressBarValues();
-//                btStartStop.setText("START");
-//                btStartStop.setBackgroundResource(R.drawable.rounded_button_green);
-//                editTextMinute.setEnabled(true);
+                textViewTime.setText(hmsTimeFormatter(timeCountInMilliSeconds));
+                setProgressBarValues();
+                btStartStop.setText("START");
+                btStartStop.setBackgroundResource(R.drawable.rounded_button_green);
+                editTextMinute.setEnabled(true);
                 timerStatus = TimerStatus.STOPPED;
             }
 
