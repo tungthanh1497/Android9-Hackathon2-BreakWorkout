@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 
 import techkids.com.android9_hackathon2_breakworkout.R;
 
-public class AlarmScene extends AppCompatActivity implements View.OnClickListener {
+public class AlarmScene extends AppCompatActivity implements View.OnClickListener, TextWatcher {
     private ProgressBar progressBarCircle;
     private EditText editTextMinute;
     private TextView textViewTime;
@@ -25,7 +27,27 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
 
     public static String TAG = AlarmScene.class.toString();
 
-    private long timeCountInMilliSeconds = 1 * 60000;
+    private long timeCountInMilliSeconds = 0;
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+        try {
+            int numberInput = Integer.parseInt(s.toString());
+            textViewTime.setText(hmsTimeFormatter(numberInput * 60 * 100));
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(), getString(R.string.message_minutes), Toast.LENGTH_LONG).show();
+        }
+    }
 
     private enum TimerStatus {
         STARTED,
@@ -53,6 +75,7 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
 
     private void initListeners() {
         btStartStop.setOnClickListener(this);
+        editTextMinute.addTextChangedListener(this);
     }
 
 
@@ -70,6 +93,11 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
 
             // call to initialize the timer values
             setTimerValues();
+            if (timeCountInMilliSeconds == 0)
+                return;
+
+            // call to start the count down timer
+            startCountDownTimer();
             // call to initialize the progress bar values
             setProgressBarValues();
 
@@ -79,8 +107,6 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
             editTextMinute.setEnabled(false);
             // changing the timer status to started
             timerStatus = TimerStatus.STARTED;
-            // call to start the count down timer
-            startCountDownTimer();
 
         } else {
             btStartStop.setText("START");
@@ -98,6 +124,7 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
         if (!editTextMinute.getText().toString().isEmpty()) {
             // fetching value from edit text and type cast to integer
             time = Integer.parseInt(editTextMinute.getText().toString().trim());
+<<<<<<< HEAD
             textViewTime.setText(hmsTimeFormatter(timeCountInMilliSeconds));  //<------
         }
 
@@ -111,6 +138,20 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
         }
         // assigning values after converting to milliseconds
         timeCountInMilliSeconds = time * 60 * 1000;
+=======
+            if (time <= 0) {
+                Toast.makeText(getApplicationContext(), "The input timer must be greater than Zero.", Toast.LENGTH_LONG).show();
+            } else {
+                // assigning values after converting to milliseconds
+                //TODO: timeCountInMilliSeconds = time * 60 * 1000;
+                timeCountInMilliSeconds = time * 60 * 1000;
+            }
+        }
+//        else {
+//            // toast message to fill edit text
+//            Toast.makeText(getApplicationContext(), getString(R.string.message_minutes), Toast.LENGTH_LONG).show();
+//        }
+>>>>>>> 357a76dd212dec9e0942bb380ef7bf476c3c0844
     }
 
 
@@ -166,4 +207,12 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
 
     }
 
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        startActivity(intent);
+    }
 }

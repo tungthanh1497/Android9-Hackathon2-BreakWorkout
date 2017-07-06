@@ -19,4 +19,13 @@ public class MainActivity extends AppCompatActivity {
         Intent intentChange = new Intent(context, AlarmScene.class);
         context.startActivity(intentChange);
     }
+
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        startActivity(intent);
+    }
 }
