@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#296562"
+    android:background="@drawable/background"
     tools:context="techkids.com.android9_hackathon2_breakworkout.views.PracticeScene">
 
     <ProgressBar
@@ -17,7 +17,7 @@
         android:max="100"
         android:progress="100"
         android:progressDrawable="@drawable/drawable_circle_custom"
-        android:rotation="-90" />
+        />
 
     <EditText
         android:id="@+id/editTextMinute"
@@ -32,9 +32,8 @@
         android:hint="@string/hint_minute"
         android:maxLines="1"
         android:minEms="5"
-        android:text="50"
-        android:textColor="#14CCBF"
-        android:textColorHint="@color/gray" />
+        android:textColor="@color/colorYellow"
+        android:textColorHint="@color/colorYellow" />
 
     <TextView
         android:id="@+id/textViewTime"
@@ -42,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="00:50:00"
-        android:textColor="#14CCBF"
+        android:textColor="@color/colorYellow"
         android:textSize="40sp" />
 
     <Button

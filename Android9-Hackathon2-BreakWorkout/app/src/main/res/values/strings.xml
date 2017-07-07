@@ -2,6 +2,6 @@
     <string name="app_name">GetOffYoDesk!</string>
     <string name="title_activity_finish_scene">FinishScene</string>
     <string name="message_minutes">Please Enter Minutes...</string>
-    <string name="hint_minute">Minutes?</string>
+    <string name="hint_minute">Minutes</string>
 
 </resources>
