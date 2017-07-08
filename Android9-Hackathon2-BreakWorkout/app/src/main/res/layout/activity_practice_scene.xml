@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="#6EC05D"
     tools:context="techkids.com.android9_hackathon2_breakworkout.views.PracticeScene">
 
     <TextView
@@ -14,66 +14,103 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:background="#14CCBF"
+        android:background="#65b355"
         android:gravity="center"
         android:text="Name of practice"
         android:textColor="#fff"
         android:textSize="32sp"
         android:textStyle="bold" />
 
-    <pl.droidsonroids.gif.GifImageView
-        android:id="@+id/giv_image"
+    <android.support.v7.widget.CardView
+        android:id="@+id/cv_image"
         android:layout_width="match_parent"
-        android:layout_height="400px"
-        android:layout_below="@+id/tv_name"
-        android:background="#fff" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_name">
+
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/giv_image"
+            android:layout_width="match_parent"
+            android:layout_height="400px"
+            android:background="#fff" />
 
 
-    <!--<TextView-->
-    <!--android:id="@+id/tv_count_down"-->
+        <!--<TextView-->
+        <!--android:id="@+id/tv_count_down"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@id/giv_image"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:background="#CECECE"-->
+        <!--android:gravity="center"-->
+        <!--android:padding="16dp"-->
+        <!--android:text="30"-->
+        <!--android:textColor="#1a0d39"-->
+        <!--android:textSize="30sp"-->
+        <!--android:textStyle="bold"-->
+        <!--android:visibility="invisible" />-->
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cv_count_down"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cv_image">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#6EC05D"
+            android:padding="8dp">
+
+            <ImageView
+                android:id="@+id/iv_play"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_play_circle_filled_black_24dp" />
+
+            <ProgressBar
+                android:id="@+id/progress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/iv_play"
+                android:max="100"
+                android:paddingLeft="5dp"
+                android:progress="0" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <!--<com.skyfishjy.library.RippleBackground xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--android:id="@+id/rb_counting"-->
     <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_below="@id/giv_image"-->
-    <!--android:layout_centerHorizontal="true"-->
-    <!--android:background="#CECECE"-->
-    <!--android:gravity="center"-->
-    <!--android:padding="16dp"-->
-    <!--android:text="30"-->
-    <!--android:textColor="#1a0d39"-->
-    <!--android:textSize="30sp"-->
-    <!--android:textStyle="bold"-->
-    <!--android:visibility="invisible" />-->
+    <!--android:layout_height="100dp"-->
+    <!--android:layout_below="@id/cv_image"-->
+    <!--app:rb_color="#51CCC3"-->
+    <!--app:rb_duration="3000"-->
+    <!--app:rb_radius="32dp"-->
+    <!--app:rb_rippleAmount="4"-->
+    <!--app:rb_scale="6">-->
 
-    <com.skyfishjy.library.RippleBackground xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/rb_counting"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_below="@id/giv_image"
-        app:rb_color="#51CCC3"
-        app:rb_duration="3000"
-        app:rb_radius="32dp"
-        app:rb_rippleAmount="4"
-        app:rb_scale="6">
+    <!--<ImageView-->
+    <!--android:id="@+id/iv_center_image"-->
+    <!--android:layout_width="55dp"-->
+    <!--android:layout_height="55dp"-->
+    <!--android:layout_centerInParent="true"-->
+    <!--android:elevation="10dp"-->
+    <!--android:src="@drawable/untitled42" />-->
 
-        <ImageView
-            android:id="@+id/iv_center_image"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:layout_centerInParent="true"
-            android:elevation="10dp"
-            android:src="@drawable/untitled42" />
-
-        <com.github.lzyzsd.circleprogress.CircleProgress
-            android:id="@+id/cp_count_down"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_centerInParent="true"
-            app:circle_finished_color="#007F2E"
-            app:circle_unfinished_color="#7F2042"
-            custom:circle_progress="100" />
-    </com.skyfishjy.library.RippleBackground>
-
+    <!--<com.github.lzyzsd.circleprogress.CircleProgress-->
+    <!--android:id="@+id/cp_count_down"-->
+    <!--android:layout_width="60dp"-->
+    <!--android:layout_height="60dp"-->
+    <!--android:layout_centerInParent="true"-->
+    <!--app:circle_finished_color="#007F2E"-->
+    <!--app:circle_unfinished_color="#7F2042"-->
+    <!--custom:circle_progress="100" />-->
+    <!--</com.skyfishjy.library.RippleBackground>-->
 
     <!--<TextView-->
     <!--android:layout_width="match_parent"-->
@@ -85,40 +122,65 @@
     <!--android:textColor="#fff"-->
     <!--android:textSize="24sp"-->
     <!--android:textStyle="bold" />-->
-    <Button
-        android:id="@+id/bt_how"
+
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/rb_counting"
-        android:background="#14CCBF"
-        android:text="How to do"
-        android:textColor="#fff"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        android:layout_below="@+id/cv_count_down">
 
-    <net.cachapa.expandablelayout.ExpandableLayout
-        android:id="@+id/expandable_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/bt_how"
-        app:el_duration="300"
-        app:el_expanded="false">
-
-        <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fillViewport="true">
+            android:layout_height="match_parent"
+            android:background="#65b355"
+            android:padding="8dp">
 
-            <TextView
-                android:id="@+id/tv_description"
+            <Button
+                android:id="@+id/bt_how"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="This is test content. This is test content. This is test content. This is test content. This is test content. This is test content. This is test content. This is test content. "
-                android:textColor="#fff"
-                android:textSize="16sp" />
-        </ScrollView>
-    </net.cachapa.expandablelayout.ExpandableLayout>
+                android:background="#fff"
+                android:text="How to do       "
+                android:textColor="#6EC05D"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/iv_drop_down"
+                android:layout_width="120dp"
+                android:layout_height="50dp"
+                android:layout_alignRight="@id/bt_how"
+                android:elevation="5dp"
+                android:paddingRight="80dp"
+                android:src="@drawable/ic_arrow_drop_up_black_24dp" />
+
+            <net.cachapa.expandablelayout.ExpandableLayout
+                android:id="@+id/expandable_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/bt_how"
+                android:background="#65b355"
+                app:el_duration="300"
+                app:el_expanded="true">
+
+                <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fillViewport="true">
+
+                    <TextView
+                        android:id="@+id/tv_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:text="This is test content. This is test content. This is test content. This is test content. This is test content. This is test content. This is test content. This is test content. "
+                        android:textColor="#fff"
+                        android:textSize="16sp" />
+                </ScrollView>
+            </net.cachapa.expandablelayout.ExpandableLayout>
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
 
 
     <!--<LinearLayout-->

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="#6EC05D"
     tools:context="techkids.com.android9_hackathon2_breakworkout.views.FinishScene">
 
     <ImageView
@@ -12,6 +12,12 @@
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:layout_centerInParent="true"
-        android:src="@drawable/untitled6" />
+        android:src="@drawable/success1" />
+    <!--<ImageView-->
+    <!--android:id="@+id/iv_boom"-->
+    <!--android:layout_width="250dp"-->
+    <!--android:layout_height="250dp"-->
+    <!--android:layout_centerInParent="true"-->
+    <!--android:src="@drawable/untitled6" />-->
 
 </RelativeLayout>

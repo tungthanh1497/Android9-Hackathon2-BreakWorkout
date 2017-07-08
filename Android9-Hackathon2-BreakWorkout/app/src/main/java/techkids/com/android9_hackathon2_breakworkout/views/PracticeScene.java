@@ -3,6 +3,7 @@ package techkids.com.android9_hackathon2_breakworkout.views;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,17 +33,20 @@ import techkids.com.android9_hackathon2_breakworkout.databases.PracticeModel;
 public class PracticeScene extends AppCompatActivity implements View.OnTouchListener, View.OnClickListener {
 
     //    TextView tvCountDown;
-    RippleBackground rbCounting;
+//    RippleBackground rbCounting;
     boolean isRuning = false;
     String TAG = PracticeScene.class.toString();
     TextView tvName;
+    ProgressBar progressBar;
     GifImageView givImage;
     TextView tvDescription;
     Button btHow;
     CountDownTimer countDownTimer;
-    ImageView ivCenterImage;
-    CircleProgress cpCountDown;
+    ImageView ivStartButton;
+    //    ImageView ivCenterImage;
+//    CircleProgress cpCountDown;
     ExpandableLayout expandableLayout;
+    ImageView ivDropDown;
     //    ExpandableWeightLayout expandableLayout;
     long timeEnd = 10000;
     long timeBreak = 100;
@@ -56,19 +61,27 @@ public class PracticeScene extends AppCompatActivity implements View.OnTouchList
         addVarById();
         setupUI(DatabaseHandle.getInstance(this).getPractice());
 //        tvCountDown = (TextView) findViewById(R.id.tv_count_down);
-        ivCenterImage.setOnTouchListener(this);
+//        ivCenterImage.setOnTouchListener(this);
+        ivStartButton.setOnTouchListener(this);
         btHow.setOnClickListener(this);
     }
 
     void addVarById() {
-        ivCenterImage = (ImageView) findViewById(R.id.iv_center_image);
+//        ivCenterImage = (ImageView) findViewById(R.id.iv_center_image);
+        ivStartButton = (ImageView) findViewById(R.id.iv_play);
         tvName = (TextView) findViewById(R.id.tv_name);
         givImage = (GifImageView) findViewById(R.id.giv_image);
         tvDescription = (TextView) findViewById(R.id.tv_description);
-        rbCounting = (RippleBackground) findViewById(R.id.rb_counting);
-        cpCountDown = (CircleProgress) findViewById(R.id.cp_count_down);
+        progressBar = (ProgressBar) findViewById(R.id.progress);
+
+        progressBar.getProgressDrawable().setColorFilter(
+                Color.WHITE, android.graphics.PorterDuff.Mode.SRC_IN);
+
+//        rbCounting = (RippleBackground) findViewById(R.id.rb_counting);
+//        cpCountDown = (CircleProgress) findViewById(R.id.cp_count_down);
         btHow = (Button) findViewById(R.id.bt_how);
         expandableLayout = (ExpandableLayout) findViewById(R.id.expandable_layout);
+        ivDropDown = (ImageView) findViewById(R.id.iv_drop_down);
 //        expandableLayout = (ExpandableWeightLayout) findViewById(R.id.expandableLayout);
     }
 
@@ -83,41 +96,42 @@ public class PracticeScene extends AppCompatActivity implements View.OnTouchList
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        if (v == ivCenterImage) {
+        if (v == ivStartButton) {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
                     if (isRuning) {
-                        ivCenterImage.setImageResource(R.drawable.untitled52_clicked);
+                        ivStartButton.setImageResource(R.drawable.ic_pause_circle_filled_black_24dp_copy);
                     } else {
-                        ivCenterImage.setImageResource(R.drawable.untitled42_clicked);
+                        ivStartButton.setImageResource(R.drawable.ic_play_circle_filled_black_24dp_copy);
                     }
                     break;
                 case MotionEvent.ACTION_UP:
                     if (isRuning) {
                         isRuning = false;
-                        cpCountDown.setProgress(100);
-                        ivCenterImage.setImageResource(R.drawable.untitled42);
-                        rbCounting.stopRippleAnimation();
+                        progressBar.setProgress(0);
+                        ivStartButton.setImageResource(R.drawable.ic_play_circle_filled_black_24dp);
+//                        rbCounting.stopRippleAnimation();
+
                         countDownTimer.cancel();
                     } else {
-                        ivCenterImage.setImageResource(R.drawable.untitled52);
+                        ivStartButton.setImageResource(R.drawable.ic_pause_circle_filled_black_24dp);
                         countDownTimer = new CountDownTimer(timeEnd, timeBreak) {
                             @Override
                             public void onTick(long millisUntilFinished) {
                                 if (!isRuning) {
                                     isRuning = true;
-                                    rbCounting.startRippleAnimation();
+//                                    rbCounting.startRippleAnimation();
                                 }
-                                int percent = (int) ((int) (millisUntilFinished * (timeEnd / timeBreak)) / timeEnd);
-                                cpCountDown.setProgress(percent);
+                                int percent = 100 - (int) ((int) (millisUntilFinished * (timeEnd / timeBreak)) / timeEnd);
+                                progressBar.setProgress(percent);
                                 Log.d(TAG, "onTick: millisUntilFinished: " + millisUntilFinished + " - percent: " + percent);
                             }
 
                             @Override
                             public void onFinish() {
-                                cpCountDown.setProgress(0);
+                                progressBar.setProgress(100);
                                 isRuning = false;
-                                rbCounting.stopRippleAnimation();
+//                                rbCounting.stopRippleAnimation();
                                 startActivity(new Intent(PracticeScene.this, FinishScene.class));
                             }
                         }.start();
@@ -132,6 +146,7 @@ public class PracticeScene extends AppCompatActivity implements View.OnTouchList
 
 
     boolean doubleBackToExitPressedOnce = false;
+
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
@@ -149,22 +164,25 @@ public class PracticeScene extends AppCompatActivity implements View.OnTouchList
 
             @Override
             public void run() {
-                doubleBackToExitPressedOnce=false;
+                doubleBackToExitPressedOnce = false;
             }
         }, 1000);
     }
 
-    boolean showUp=false;
+    boolean showUp = true;
+
     @Override
     public void onClick(View v) {
-        if(v==btHow){
-            if(showUp){
+        if (v == btHow) {
+            if (showUp) {
                 expandableLayout.setExpanded(false);
 //                expandableLayout.collapse();
-                showUp=false;
-            }else {
+                ivDropDown.setImageResource(R.drawable.ic_arrow_drop_down_black_24dp);
+                showUp = false;
+            } else {
                 expandableLayout.setExpanded(true);
-                showUp=true;
+                ivDropDown.setImageResource(R.drawable.ic_arrow_drop_up_black_24dp);
+                showUp = true;
             }
         }
     }

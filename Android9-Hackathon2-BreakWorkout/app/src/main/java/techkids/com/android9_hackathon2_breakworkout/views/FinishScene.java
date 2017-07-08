@@ -72,11 +72,11 @@ public class FinishScene extends AppCompatActivity implements View.OnTouchListen
         if (v == vBoom && !isclicked) {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
-                    vBoom.setImageResource(R.drawable.untitled62_clicked);
+                    vBoom.setImageResource(R.drawable.success1_clicked);
                     break;
                 case MotionEvent.ACTION_UP:
                     isclicked = true;
-                    vBoom.setImageResource(R.drawable.untitled62);
+                    vBoom.setImageResource(R.drawable.success1);
                     ExplosionField explosionField = ExplosionField.attach2Window((Activity) context);
                     explosionField.explode(vBoom);
                     Handler handler = new Handler();
@@ -90,7 +90,9 @@ public class FinishScene extends AppCompatActivity implements View.OnTouchListen
         }
         return false;
     }
+
     boolean doubleBackToExitPressedOnce = false;
+
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
@@ -108,7 +110,7 @@ public class FinishScene extends AppCompatActivity implements View.OnTouchListen
 
             @Override
             public void run() {
-                doubleBackToExitPressedOnce=false;
+                doubleBackToExitPressedOnce = false;
             }
         }, 1000);
     }

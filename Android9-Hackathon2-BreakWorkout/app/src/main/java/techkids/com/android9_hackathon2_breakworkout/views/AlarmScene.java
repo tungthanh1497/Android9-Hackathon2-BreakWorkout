@@ -1,12 +1,14 @@
 package techkids.com.android9_hackathon2_breakworkout.views;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,12 +21,13 @@ import java.util.concurrent.TimeUnit;
 
 import techkids.com.android9_hackathon2_breakworkout.R;
 
-public class AlarmScene extends AppCompatActivity implements View.OnClickListener, TextWatcher {
+public class AlarmScene extends AppCompatActivity implements TextWatcher, View.OnTouchListener {
     private ProgressBar progressBarCircle;
     private EditText editTextMinute;
     private TextView textViewTime;
     private Button btStartStop;
     private CountDownTimer countDownTimer;
+
 
     public static String TAG = AlarmScene.class.toString();
 
@@ -49,6 +52,7 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
             Toast.makeText(getApplicationContext(), getString(R.string.message_minutes), Toast.LENGTH_LONG).show();
         }
     }
+
 
     private enum TimerStatus {
         STARTED,
@@ -75,19 +79,11 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
     }
 
     private void initListeners() {
-        btStartStop.setOnClickListener(this);
+//        btStartStop.setOnClickListener(this);
+        btStartStop.setOnTouchListener(this);
         editTextMinute.addTextChangedListener(this);
     }
 
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.imageViewStartStop:
-                startStop();
-                break;
-        }
-    }
 
     private void startStop() {
         if (timerStatus == TimerStatus.STOPPED) {
@@ -96,6 +92,7 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
             setTimerValues();
             if (timeCountInMilliSeconds == 0) {
                 Toast.makeText(getApplicationContext(), "The input timer must be greater than Zero.", Toast.LENGTH_LONG).show();
+                btStartStop.setBackgroundResource(R.drawable.rounded_button_green);
                 return;
             }
             // call to start the count down timer
@@ -105,6 +102,7 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
 
             btStartStop.setText("STOP");
             btStartStop.setBackgroundResource(R.drawable.rounded_button_red);
+            btStartStop.setTextColor(Color.parseColor("#ff0000"));
             // making edit text not editable
             editTextMinute.setVisibility(View.INVISIBLE);
             // changing the timer status to started
@@ -112,8 +110,13 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
 
         } else {
             btStartStop.setText("START");
+            btStartStop.setTextColor(Color.parseColor("#6EC05D"));
             btStartStop.setBackgroundResource(R.drawable.rounded_button_green);
             editTextMinute.setVisibility(View.VISIBLE);
+            textViewTime.setText(hmsTimeFormatter(0));
+            editTextMinute.setText("");
+            progressBarCircle.setProgress(100);
+            timeCountInMilliSeconds = 0;
             timerStatus = TimerStatus.STOPPED;
             stopCountDownTimer();
 
@@ -128,9 +131,9 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
             time = Integer.parseInt(editTextMinute.getText().toString().trim());
 //            if (time <= 0) {
 //            } else {
-                // assigning values after converting to milliseconds
-                //TODO: timeCountInMilliSeconds = time * 60 * 1000;
-                timeCountInMilliSeconds = time * 60 * 100;
+            // assigning values after converting to milliseconds
+            //TODO: timeCountInMilliSeconds = time * 60 * 1000;
+            timeCountInMilliSeconds = time * 60 * 100;
 //            }
         }
 //        else {
@@ -148,12 +151,14 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
 
                 textViewTime.setText(hmsTimeFormatter(millisUntilFinished));
 
-                progressBarCircle.setProgress((int) (millisUntilFinished / 1000));
+                int percent = (int) ((int) (millisUntilFinished * (timeCountInMilliSeconds / 1000)) / timeCountInMilliSeconds);
+                progressBarCircle.setProgress(percent);
 
             }
 
             @Override
             public void onFinish() {
+                progressBarCircle.setProgress(0);
                 startActivity(new Intent(AlarmScene.this, PracticeScene.class));
                 editTextMinute.setVisibility(View.INVISIBLE);
 //                textViewTime.setText(hmsTimeFormatter(timeCountInMilliSeconds));
@@ -193,6 +198,7 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
     }
 
     boolean doubleBackToExitPressedOnce = false;
+
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
@@ -210,8 +216,28 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
 
             @Override
             public void run() {
-                doubleBackToExitPressedOnce=false;
+                doubleBackToExitPressedOnce = false;
             }
         }, 1000);
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        if (v == btStartStop) {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_UP:
+                    startStop();
+                    break;
+                case MotionEvent.ACTION_DOWN:
+                    if (timerStatus == TimerStatus.STOPPED) {
+                        btStartStop.setBackgroundResource(R.drawable.rounded_button_red_copy);
+                    } else {
+                        btStartStop.setBackgroundResource(R.drawable.rounded_button_green_copy);
+                    }
+                    break;
+            }
+            return true;
+        }
+        return false;
     }
 }
