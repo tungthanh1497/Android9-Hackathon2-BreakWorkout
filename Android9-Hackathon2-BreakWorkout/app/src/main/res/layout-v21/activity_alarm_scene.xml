@@ -31,8 +31,8 @@
         android:maxLength="15"
         android:maxLines="1"
         android:minEms="5"
-        android:textColor="@color/colorYellow"
-        android:textColorHint="@color/colorYellow" />
+        android:textColor="#3d8f8d"
+        android:textColorHint="#3d8f8d" />
 
     <TextView
         android:id="@+id/textViewTime"
@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="00:00:00"
-        android:textColor="@color/colorYellow"
+        android:textColor="#3d8f8d"
         android:textSize="40sp" />
 
     <Button
