@@ -26,7 +26,7 @@
                     android:pivotX="50%"
                     android:pivotY="50%"
                     android:toDegrees="360" />
-                <solid android:color="#14CCBF"/>
+                <solid android:color="#3d8f8d"/>
             </shape>
         </rotate>
 
