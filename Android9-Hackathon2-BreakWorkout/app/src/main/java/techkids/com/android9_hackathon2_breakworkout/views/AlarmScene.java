@@ -130,7 +130,7 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
 //            } else {
                 // assigning values after converting to milliseconds
                 //TODO: timeCountInMilliSeconds = time * 60 * 1000;
-                timeCountInMilliSeconds = time * 60 * 100;
+                timeCountInMilliSeconds = time * 60 * 1000;
 //            }
         }
 //        else {
