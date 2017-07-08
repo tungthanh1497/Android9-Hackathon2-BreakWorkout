@@ -131,9 +131,15 @@ public class AlarmScene extends AppCompatActivity implements TextWatcher, View.O
             time = Integer.parseInt(editTextMinute.getText().toString().trim());
 //            if (time <= 0) {
 //            } else {
+<<<<<<< HEAD
             // assigning values after converting to milliseconds
             //TODO: timeCountInMilliSeconds = time * 60 * 1000;
             timeCountInMilliSeconds = time * 60 * 100;
+=======
+                // assigning values after converting to milliseconds
+                //TODO: timeCountInMilliSeconds = time * 60 * 1000;
+                timeCountInMilliSeconds = time * 60 * 1000;
+>>>>>>> 1a3e52959658c5b54c3072d8b926e18d24f2e67a
 //            }
         }
 //        else {
