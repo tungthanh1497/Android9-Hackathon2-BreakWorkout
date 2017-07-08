@@ -8,6 +8,18 @@
     tools:context="techkids.com.android9_hackathon2_breakworkout.views.PracticeScene">
 
     <ProgressBar
+        android:id="@+id/progressBarCircleBorder"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="270dp"
+        android:layout_height="270dp"
+        android:layout_centerInParent="true"
+        android:indeterminate="false"
+        android:max="100"
+        android:progress="100"
+        android:elevation="5dp"
+        android:progressDrawable="@drawable/drawable_circle_custom_border"
+        />
+    <ProgressBar
         android:id="@+id/progressBarCircle"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="270dp"
@@ -16,8 +28,9 @@
         android:indeterminate="false"
         android:max="100"
         android:progress="100"
+        android:elevation="5dp"
         android:progressDrawable="@drawable/drawable_circle_custom"
-         />
+        />
 
     <EditText
         android:id="@+id/editTextMinute"
