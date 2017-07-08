@@ -125,14 +125,14 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
             // fetching value from edit text and type cast to integer
             time = Integer.parseInt(editTextMinute.getText().toString().trim());
             if (time <= 0) {
-                Toast.makeText(getApplicationContext(), "The input timer must be greater than Zero.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "The input timer must be greater than zero.", Toast.LENGTH_LONG).show();
             } else {
                 // assigning values after converting to milliseconds
                 //TODO: timeCountInMilliSeconds = time * 60 * 1000;
                 timeCountInMilliSeconds = time * 60 * 1000;
             }
         }
-//        else {
+//        else {wd
 //            // toast message to fill edit text
 //            Toast.makeText(getApplicationContext(), getString(R.string.message_minutes), Toast.LENGTH_LONG).show();
 //        }
