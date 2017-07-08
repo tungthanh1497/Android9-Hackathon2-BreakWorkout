@@ -1,156 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:background="@drawable/background"
+    tools:context="techkids.com.android9_hackathon2_breakworkout.views.PracticeScene">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:custom="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <TextView
+        android:id="@+id/tv_name"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#296562"
-        tools:context="techkids.com.android9_hackathon2_breakworkout.views.PracticeScene">
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="#14CCBF"
+        android:gravity="center"
+        android:text="Name of practice"
+        android:textColor="#fff"
+        android:textSize="32sp"
+        android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/tv_name"
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/giv_image"
+        android:layout_width="match_parent"
+        android:layout_height="400px"
+        android:layout_below="@+id/tv_name"
+        android:background="#fff" />
+
+
+    <!--<TextView-->
+    <!--android:id="@+id/tv_count_down"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@id/giv_image"-->
+    <!--android:layout_centerHorizontal="true"-->
+    <!--android:background="#CECECE"-->
+    <!--android:gravity="center"-->
+    <!--android:padding="16dp"-->
+    <!--android:text="30"-->
+    <!--android:textColor="#1a0d39"-->
+    <!--android:textSize="30sp"-->
+    <!--android:textStyle="bold"-->
+    <!--android:visibility="invisible" />-->
+
+    <com.skyfishjy.library.RippleBackground xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/rb_counting"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@id/giv_image"
+        app:rb_color="#51CCC3"
+        app:rb_duration="3000"
+        app:rb_radius="32dp"
+        app:rb_rippleAmount="4"
+        app:rb_scale="6">
+
+        <ImageView
+            android:id="@+id/iv_center_image"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_centerInParent="true"
+            android:elevation="10dp"
+            android:src="@drawable/untitled42" />
+
+        <com.github.lzyzsd.circleprogress.CircleProgress
+            android:id="@+id/cp_count_down"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerInParent="true"
+            app:circle_finished_color="#007F2E"
+            app:circle_unfinished_color="#7F2042"
+            custom:circle_progress="100" />
+    </com.skyfishjy.library.RippleBackground>
+
+
+    <!--<TextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@+id/rb_counting"-->
+    <!--android:background="@color/colorPrimary"-->
+    <!--android:gravity="center"-->
+    <!--android:text="How to do"-->
+    <!--android:textColor="#fff"-->
+    <!--android:textSize="24sp"-->
+    <!--android:textStyle="bold" />-->
+    <Button
+        android:id="@+id/bt_how"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rb_counting"
+        android:background="#14CCBF"
+        android:text="How to do"
+        android:textColor="#fff"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <net.cachapa.expandablelayout.ExpandableLayout
+        android:id="@+id/expandable_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bt_how"
+        app:el_duration="300"
+        app:el_expanded="false">
+
+        <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:background="#14CCBF"
-            android:gravity="center"
-            android:text="Name of practice"
-            android:textColor="#fff"
-            android:textSize="32sp"
-            android:textStyle="bold" />
+            android:fillViewport="true">
 
-        <pl.droidsonroids.gif.GifImageView
-            android:id="@+id/giv_image"
-            android:layout_width="match_parent"
-            android:layout_height="400px"
-            android:layout_below="@+id/tv_name"
-            android:background="#fff" />
+            <TextView
+                android:id="@+id/tv_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="This is test content. This is test content. This is test content. This is test content. This is test content. This is test content. This is test content. This is test content. "
+                android:textColor="#fff"
+                android:textSize="16sp" />
+        </ScrollView>
+    </net.cachapa.expandablelayout.ExpandableLayout>
 
 
-        <!--<TextView-->
-        <!--android:id="@+id/tv_count_down"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@id/giv_image"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:background="#CECECE"-->
-        <!--android:gravity="center"-->
-        <!--android:padding="16dp"-->
-        <!--android:text="30"-->
-        <!--android:textColor="#1a0d39"-->
-        <!--android:textSize="30sp"-->
-        <!--android:textStyle="bold"-->
-        <!--android:visibility="invisible" />-->
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:orientation="vertical"-->
+    <!--android:weightSum="5">-->
 
-        <com.skyfishjy.library.RippleBackground xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/rb_counting"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_below="@id/giv_image"
-            app:rb_color="#51CCC3"
-            app:rb_duration="3000"
-            app:rb_radius="32dp"
-            app:rb_rippleAmount="4"
-            app:rb_scale="6">
+    <!--<View-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="0dp"-->
+    <!--android:layout_weight="1" />-->
 
-            <ImageView
-                android:id="@+id/iv_center_image"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
-                android:layout_centerInParent="true"
-                android:elevation="10dp"
-                android:src="@drawable/untitled42" />
+    <!--<com.github.aakira.expandablelayout.ExpandableWeightLayout-->
+    <!--android:id="@+id/expandableLayout"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="0dp"-->
+    <!--android:layout_weight="3"-->
+    <!--android:background="@color/colorAccent"-->
+    <!--android:padding="16dp"-->
+    <!--app:ael_duration="1000"-->
+    <!--app:ael_expanded="false"-->
+    <!--app:ael_interpolator="anticipateOvershoot">-->
 
-            <com.github.lzyzsd.circleprogress.CircleProgress
-                android:id="@+id/cp_count_down"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_centerInParent="true"
-                app:circle_finished_color="#007F2E"
-                app:circle_unfinished_color="#7F2042"
-                custom:circle_progress="100" />
-        </com.skyfishjy.library.RippleBackground>
+    <!--<TextView-->
+    <!--android:id="@+id/tv_description"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:padding="16dp"-->
+    <!--android:text="This is test content. This is test content. This is test content. This is test content. This is test content. This is test content. This is test content. This is test content. "-->
+    <!--android:textColor="#fff"-->
+    <!--android:textSize="16sp" />-->
+    <!---->
+    <!--</com.github.aakira.expandablelayout.ExpandableWeightLayout>-->
+
+    <!--<View-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="0dp"-->
+    <!--android:layout_weight="1" />-->
+    <!--</LinearLayout>-->
 
 
-        <!--<TextView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@+id/rb_counting"-->
-        <!--android:background="@color/colorPrimary"-->
-        <!--android:gravity="center"-->
-        <!--android:text="How to do"-->
-        <!--android:textColor="#fff"-->
-        <!--android:textSize="24sp"-->
-        <!--android:textStyle="bold" />-->
-        <Button
-            android:id="@+id/bt_how"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/rb_counting"
-            android:background="#14CCBF"
-            android:text="How to do"
-            android:textColor="#fff"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+</RelativeLayout>
 
-        <TextView
-            android:id="@+id/tv_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/bt_how"
-            android:padding="16dp"
-            android:text="This is test content. This is test content. This is test content. This is test content. This is test content. This is test content. This is test content. This is test content. "
-            android:textColor="#fff"
-            android:textSize="16sp" />
-
-        <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:orientation="vertical"-->
-        <!--android:weightSum="5">-->
-
-        <!--<View-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:layout_weight="1" />-->
-
-        <!--<com.github.aakira.expandablelayout.ExpandableWeightLayout-->
-        <!--android:id="@+id/expandableLayout"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:layout_weight="3"-->
-        <!--android:background="@color/colorAccent"-->
-        <!--android:padding="16dp"-->
-        <!--app:ael_duration="1000"-->
-        <!--app:ael_expanded="false"-->
-        <!--app:ael_interpolator="anticipateOvershoot">-->
-
-        <!--<TextView-->
-        <!--android:id="@+id/tv_description"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:padding="16dp"-->
-        <!--android:text="This is test content. This is test content. This is test content. This is test content. This is test content. This is test content. This is test content. This is test content. "-->
-        <!--android:textColor="#fff"-->
-        <!--android:textSize="16sp" />-->
-        <!---->
-        <!--</com.github.aakira.expandablelayout.ExpandableWeightLayout>-->
-
-        <!--<View-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:layout_weight="1" />-->
-        <!--</LinearLayout>-->
-
-
-    </RelativeLayout>
-
-</ScrollView>
 
