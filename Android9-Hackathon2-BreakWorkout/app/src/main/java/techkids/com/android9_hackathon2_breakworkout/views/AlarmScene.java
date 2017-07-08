@@ -2,6 +2,7 @@ package techkids.com.android9_hackathon2_breakworkout.views;
 
 import android.content.Intent;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -93,9 +94,10 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
 
             // call to initialize the timer values
             setTimerValues();
-            if (timeCountInMilliSeconds == 0)
+            if (timeCountInMilliSeconds == 0) {
+                Toast.makeText(getApplicationContext(), "The input timer must be greater than Zero.", Toast.LENGTH_LONG).show();
                 return;
-
+            }
             // call to start the count down timer
             startCountDownTimer();
             // call to initialize the progress bar values
@@ -104,14 +106,14 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
             btStartStop.setText("STOP");
             btStartStop.setBackgroundResource(R.drawable.rounded_button_red);
             // making edit text not editable
-            editTextMinute.setEnabled(false);
+            editTextMinute.setVisibility(View.INVISIBLE);
             // changing the timer status to started
             timerStatus = TimerStatus.STARTED;
 
         } else {
             btStartStop.setText("START");
             btStartStop.setBackgroundResource(R.drawable.rounded_button_green);
-            editTextMinute.setEnabled(true);
+            editTextMinute.setVisibility(View.VISIBLE);
             timerStatus = TimerStatus.STOPPED;
             stopCountDownTimer();
 
@@ -124,13 +126,12 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
         if (!editTextMinute.getText().toString().isEmpty()) {
             // fetching value from edit text and type cast to integer
             time = Integer.parseInt(editTextMinute.getText().toString().trim());
-            if (time <= 0) {
-                Toast.makeText(getApplicationContext(), "The input timer must be greater than Zero.", Toast.LENGTH_LONG).show();
-            } else {
+//            if (time <= 0) {
+//            } else {
                 // assigning values after converting to milliseconds
                 //TODO: timeCountInMilliSeconds = time * 60 * 1000;
-                timeCountInMilliSeconds = time * 60 * 1000;
-            }
+                timeCountInMilliSeconds = time * 60 * 100;
+//            }
         }
 //        else {
 //            // toast message to fill edit text
@@ -154,6 +155,7 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
             @Override
             public void onFinish() {
                 startActivity(new Intent(AlarmScene.this, PracticeScene.class));
+                editTextMinute.setVisibility(View.INVISIBLE);
 //                textViewTime.setText(hmsTimeFormatter(timeCountInMilliSeconds));
 //                setProgressBarValues();
 //                btStartStop.setText("START");
@@ -190,12 +192,26 @@ public class AlarmScene extends AppCompatActivity implements View.OnClickListene
 
     }
 
-
+    boolean doubleBackToExitPressedOnce = false;
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent();
-        intent.setAction(Intent.ACTION_MAIN);
-        intent.addCategory(Intent.CATEGORY_HOME);
-        startActivity(intent);
+        if (doubleBackToExitPressedOnce) {
+            Intent intent = new Intent();
+            intent.setAction(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            startActivity(intent);
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click BACK again to go to Home Screen", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 1000);
     }
 }

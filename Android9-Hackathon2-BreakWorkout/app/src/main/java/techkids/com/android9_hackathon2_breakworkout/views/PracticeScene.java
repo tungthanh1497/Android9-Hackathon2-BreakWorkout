@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -14,17 +15,20 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.aakira.expandablelayout.ExpandableWeightLayout;
 import com.github.lzyzsd.circleprogress.CircleProgress;
 import com.skyfishjy.library.RippleBackground;
+
+import net.cachapa.expandablelayout.ExpandableLayout;
 
 import pl.droidsonroids.gif.GifImageView;
 import techkids.com.android9_hackathon2_breakworkout.R;
 import techkids.com.android9_hackathon2_breakworkout.databases.DatabaseHandle;
 import techkids.com.android9_hackathon2_breakworkout.databases.PracticeModel;
 
-public class PracticeScene extends AppCompatActivity implements View.OnTouchListener {
+public class PracticeScene extends AppCompatActivity implements View.OnTouchListener, View.OnClickListener {
 
     //    TextView tvCountDown;
     RippleBackground rbCounting;
@@ -37,6 +41,7 @@ public class PracticeScene extends AppCompatActivity implements View.OnTouchList
     CountDownTimer countDownTimer;
     ImageView ivCenterImage;
     CircleProgress cpCountDown;
+    ExpandableLayout expandableLayout;
     //    ExpandableWeightLayout expandableLayout;
     long timeEnd = 10000;
     long timeBreak = 100;
@@ -52,7 +57,7 @@ public class PracticeScene extends AppCompatActivity implements View.OnTouchList
         setupUI(DatabaseHandle.getInstance(this).getPractice());
 //        tvCountDown = (TextView) findViewById(R.id.tv_count_down);
         ivCenterImage.setOnTouchListener(this);
-//        btHow.setOnClickListener(this);
+        btHow.setOnClickListener(this);
     }
 
     void addVarById() {
@@ -63,6 +68,7 @@ public class PracticeScene extends AppCompatActivity implements View.OnTouchList
         rbCounting = (RippleBackground) findViewById(R.id.rb_counting);
         cpCountDown = (CircleProgress) findViewById(R.id.cp_count_down);
         btHow = (Button) findViewById(R.id.bt_how);
+        expandableLayout = (ExpandableLayout) findViewById(R.id.expandable_layout);
 //        expandableLayout = (ExpandableWeightLayout) findViewById(R.id.expandableLayout);
     }
 
@@ -125,11 +131,41 @@ public class PracticeScene extends AppCompatActivity implements View.OnTouchList
     }
 
 
+    boolean doubleBackToExitPressedOnce = false;
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent();
-        intent.setAction(Intent.ACTION_MAIN);
-        intent.addCategory(Intent.CATEGORY_HOME);
-        startActivity(intent);
+        if (doubleBackToExitPressedOnce) {
+            Intent intent = new Intent();
+            intent.setAction(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            startActivity(intent);
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click BACK again to go to Home Screen", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 1000);
+    }
+
+    boolean showUp=false;
+    @Override
+    public void onClick(View v) {
+        if(v==btHow){
+            if(showUp){
+                expandableLayout.setExpanded(false);
+//                expandableLayout.collapse();
+                showUp=false;
+            }else {
+                expandableLayout.setExpanded(true);
+                showUp=true;
+            }
+        }
     }
 }
