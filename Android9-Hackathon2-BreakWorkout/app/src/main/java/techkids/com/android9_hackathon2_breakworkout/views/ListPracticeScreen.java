@@ -8,6 +8,8 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -20,6 +22,7 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.github.douglasjunior.androidSimpleTooltip.SimpleTooltip;
 import pl.droidsonroids.gif.GifImageView;
 import techkids.com.android9_hackathon2_breakworkout.R;
 import techkids.com.android9_hackathon2_breakworkout.databases.DatabaseHandle;
@@ -30,6 +33,8 @@ import tyrantgit.explosionfield.ExplosionField;
 public class ListPracticeScreen extends AppCompatActivity implements View.OnClickListener {
 
     public static String TAG = AlarmScreen.class.toString();
+
+    int numberTips = 0;
 
     Context context = this;
     ImageView ivDemo1;
@@ -69,6 +74,19 @@ public class ListPracticeScreen extends AppCompatActivity implements View.OnClic
         setUI();
         rlPractice1.setOnClickListener(this);
         rlPractice2.setOnClickListener(this);
+        if (!FinishScreen.isFirttime2) {
+            FinishScreen.isFirttime2 = true;
+            new SimpleTooltip.Builder(this)
+                    .anchorView(rlPractice1)
+                    .text("Click here to start practice")
+                    .gravity(Gravity.BOTTOM)
+                    .animated(true)
+                    .transparentOverlay(false)
+                    .build()
+                    .show();
+        } else {
+            numberTips = 3;
+        }
     }
 
 
@@ -129,6 +147,18 @@ public class ListPracticeScreen extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onClick(View v) {
+        if (numberTips < 1) {
+            numberTips++;
+            new SimpleTooltip.Builder(this)
+                    .anchorView(ivFinish)
+                    .text("When you finish all practice. Click here to back your work.")
+                    .gravity(Gravity.TOP)
+                    .animated(true)
+                    .transparentOverlay(false)
+                    .build()
+                    .show();
+            return;
+        }
         if (v == rlPractice1 && ivDone1.getVisibility() == View.INVISIBLE) {
             isFirst = true;
             Bundle bundle = new Bundle();

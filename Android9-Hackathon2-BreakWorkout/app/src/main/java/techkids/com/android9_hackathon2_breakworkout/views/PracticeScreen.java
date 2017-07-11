@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
 
+import io.github.douglasjunior.androidSimpleTooltip.SimpleTooltip;
 import pl.droidsonroids.gif.GifImageView;
 import techkids.com.android9_hackathon2_breakworkout.R;
 import techkids.com.android9_hackathon2_breakworkout.databases.DatabaseHandle;
@@ -41,11 +43,13 @@ public class PracticeScreen extends AppCompatActivity implements View.OnTouchLis
     ExpandableLayout expandableLayout;
     ImageView ivDropDown;
     //    ExpandableWeightLayout expandableLayout;
-    long timeEnd = 3000;
+    long timeEnd = 10000;
     long timeBreak = 100;
     boolean isOpen = false;
     boolean isComfortable;
     boolean isDone = false;
+
+    int numberTips=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +66,18 @@ public class PracticeScreen extends AppCompatActivity implements View.OnTouchLis
         setupUI(practiceModel);
         ivStartButton.setOnTouchListener(this);
         btHow.setOnClickListener(this);
+
+        if (!FinishScreen.isFirttime3) {
+            FinishScreen.isFirttime3 = true;
+            new SimpleTooltip.Builder(this)
+                    .anchorView(ivStartButton)
+                    .text("Click here when you've already.")
+                    .gravity(Gravity.BOTTOM)
+                    .animated(true)
+                    .transparentOverlay(false)
+                    .build()
+                    .show();
+        }
     }
 
     void addVarById() {

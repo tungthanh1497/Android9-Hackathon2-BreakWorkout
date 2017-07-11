@@ -8,11 +8,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +22,7 @@ import com.jaredrummler.materialspinner.MaterialSpinner;
 
 import java.util.concurrent.TimeUnit;
 
+import io.github.douglasjunior.androidSimpleTooltip.SimpleTooltip;
 import techkids.com.android9_hackathon2_breakworkout.R;
 
 public class AlarmScreen extends AppCompatActivity implements TextWatcher, View.OnTouchListener {
@@ -29,10 +32,10 @@ public class AlarmScreen extends AppCompatActivity implements TextWatcher, View.
     private Button btStartStop;
     private CountDownTimer countDownTimer;
     MaterialSpinner materialSpinner;
-
-    private static final String[] ANDROID_VERSIONS = {"Comfortable move","Restriction move"};
-    boolean isComfortable=true;
-
+    int numberTips = 0;
+    private static final String[] ANDROID_VERSIONS = {"Comfortable move", "Restriction move"};
+    boolean isComfortable = true;
+    View vTouch;
     public static String TAG = AlarmScreen.class.toString();
 
     private long timeCountInMilliSeconds = 0;
@@ -51,6 +54,7 @@ public class AlarmScreen extends AppCompatActivity implements TextWatcher, View.
     public void afterTextChanged(Editable s) {
         try {
             int numberInput = Integer.parseInt(s.toString());
+// TODO:           textViewTime.setText(hmsTimeFormatter(numberInput * 60 * 1000));
             textViewTime.setText(hmsTimeFormatter(numberInput * 60 * 100));
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(), getString(R.string.message_minutes), Toast.LENGTH_LONG).show();
@@ -73,9 +77,25 @@ public class AlarmScreen extends AppCompatActivity implements TextWatcher, View.
         initViews();
         initListeners();
         materialSpinner.setItems(ANDROID_VERSIONS);
+
+        if(!FinishScreen.isFirttime1){
+            FinishScreen.isFirttime1=true;
+            new SimpleTooltip.Builder(this)
+                    .anchorView(materialSpinner)
+                    .text("Select your kind of work environment here")
+                    .gravity(Gravity.BOTTOM)
+                    .animated(true)
+                    .transparentOverlay(false)
+                    .build()
+                    .show();
+        }else{
+            numberTips=3;
+        }
+
     }
 
     private void initViews() {
+        vTouch = findViewById(R.id.v_touch);
         progressBarCircle = (ProgressBar) findViewById(R.id.progressBarCircle);
         editTextMinute = (EditText) findViewById(R.id.editTextMinute);
         textViewTime = (TextView) findViewById(R.id.textViewTime);
@@ -85,14 +105,15 @@ public class AlarmScreen extends AppCompatActivity implements TextWatcher, View.
 
     private void initListeners() {
 //        btStartStop.setOnClickListener(this);
+        vTouch.setOnTouchListener(this);
         btStartStop.setOnTouchListener(this);
         editTextMinute.addTextChangedListener(this);
         materialSpinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
-            @Override public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
-                if(position==1){
-                    isComfortable=false;
-                }
-                else isComfortable=true;
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+                if (position == 1) {
+                    isComfortable = false;
+                } else isComfortable = true;
             }
         });
     }
@@ -239,6 +260,32 @@ public class AlarmScreen extends AppCompatActivity implements TextWatcher, View.
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
+        if (numberTips < 2 && event.getAction() == MotionEvent.ACTION_UP) {
+            numberTips++;
+            switch (numberTips) {
+                case 1:
+                    new SimpleTooltip.Builder(this)
+                            .anchorView(editTextMinute)
+                            .text("Enter number of minutes you want to have a breaktime here. (Suggest: 25mins)")
+                            .gravity(Gravity.TOP)
+                            .animated(true)
+                            .transparentOverlay(false)
+                            .build()
+                            .show();
+                    break;
+                case 2:
+                    new SimpleTooltip.Builder(this)
+                            .anchorView(btStartStop)
+                            .text("Click here and start your own work.")
+                            .gravity(Gravity.TOP)
+                            .animated(true)
+                            .transparentOverlay(false)
+                            .build()
+                            .show();
+                    break;
+            }
+            return false;
+        }
         if (v == btStartStop) {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_UP:

@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/total_layout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#3CBC5F"
     tools:context="techkids.com.android9_hackathon2_breakworkout.views.PracticeScreen">
-
+    <View
+        android:id="@+id/v_touch"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
 
     <!--<techkids.com.android9_hackathon2_breakworkout.libraries.SmoothCheckBox-->
     <!--android:id="@+id/scb_check"-->
@@ -75,7 +83,7 @@
         android:gravity="center"
         android:hint="@string/hint_minute"
         android:inputType="number"
-        android:maxLength="6"
+        android:maxLength="5"
         android:maxLines="1"
         android:minEms="5"
         android:textColor="#fff"

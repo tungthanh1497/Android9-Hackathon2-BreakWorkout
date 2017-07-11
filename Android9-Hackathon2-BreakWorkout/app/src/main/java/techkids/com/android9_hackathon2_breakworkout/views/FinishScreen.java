@@ -17,6 +17,10 @@ import tyrantgit.explosionfield.ExplosionField;
 
 public class FinishScreen extends AppCompatActivity implements View.OnTouchListener {
 
+    static boolean isFirttime1=false;
+    static boolean isFirttime2=false;
+    static boolean isFirttime3=false;
+
     ImageView vBoom;
     boolean isclicked = false;
     Context context = this;
