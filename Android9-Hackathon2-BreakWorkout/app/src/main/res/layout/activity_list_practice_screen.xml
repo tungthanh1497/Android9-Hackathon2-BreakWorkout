@@ -1,166 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#3CBC5F"
-    android:orientation="vertical"
-    android:padding="16dp"
     tools:context="techkids.com.android9_hackathon2_breakworkout.views.ListPracticeScreen">
 
-    <RelativeLayout
-        android:id="@+id/rl_practice1"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:background="#2C8945"
-        android:clickable="true"
-        android:padding="16dp">
-
-        <ImageView
-            android:id="@+id/iv_demo1"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="16dp"
-            android:scaleType="centerCrop" />
-
-
-        <TextView
-            android:id="@+id/tv_name1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_toEndOf="@+id/iv_demo1"
-            android:text="Name of practice"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tv_muscle1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_name1"
-            android:layout_toRightOf="@+id/iv_demo1"
-            android:text=""
-            android:textStyle="italic" />
-
-        <techkids.com.android9_hackathon2_breakworkout.libraries.SmoothCheckBox
-            android:id="@+id/scb_done1"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:clickable="false"
-            android:contextClickable="false"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:visibility="invisible"
-            app:color_checked="#fff"
-            app:color_tick="#3CBC5F"
-            app:color_unchecked="#d6d1d1"
-            app:color_unchecked_stroke="#bebaba" />
-        <ImageView
-            android:id="@+id/iv_done1"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:src="@drawable/ic_check_circle_black_24dp"
-            android:visibility="invisible"/>
-    </RelativeLayout>
-
-    <ProgressBar
-        android:id="@+id/progress1"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_margin="16dp"
-        android:layout_toRightOf="@+id/iv_play"
-        android:max="100"
-        android:progress="0" />
-
-
-    <RelativeLayout
-        android:id="@+id/rl_practice2"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:background="#2C8945"
-        android:padding="16dp">
-
-        <ImageView
-            android:id="@+id/iv_demo2"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="16dp"
-            android:scaleType="centerCrop" />
-
-        <TextView
-            android:id="@+id/tv_name2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="20dp"
-            android:layout_toEndOf="@+id/iv_demo2"
-            android:text="Name of practice"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tv_muscle2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_name2"
-            android:layout_toRightOf="@+id/iv_demo2"
-            android:text=""
-            android:textStyle="italic" />
-
-        <techkids.com.android9_hackathon2_breakworkout.libraries.SmoothCheckBox
-            android:id="@+id/scb_done2"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:clickable="false"
-            android:contextClickable="false"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:visibility="invisible"
-            app:color_checked="#fff"
-            app:color_tick="#3CBC5F"
-            app:color_unchecked="#d6d1d1"
-            app:color_unchecked_stroke="#bebaba" />
-        <ImageView
-            android:id="@+id/iv_done2"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:src="@drawable/ic_check_circle_black_24dp"
-            android:visibility="invisible"/>
-    </RelativeLayout>
-
-
-    <ProgressBar
-        android:id="@+id/progress2"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_margin="16dp"
-        android:layout_toRightOf="@+id/iv_play"
-        android:max="100"
-        android:progress="0" />
-
-    <ImageView
-        android:id="@+id/iv_boom"
-        android:layout_width="150dp"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:src="@drawable/ic_check_circle_black_24dp_copy" />
-</LinearLayout>
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <RelativeLayout
+            android:id="@+id/rl_practice1"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="#2C8945"
+            android:clickable="true"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/iv_demo1"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="16dp"
+                android:scaleType="centerCrop" />
+
+
+            <TextView
+                android:id="@+id/tv_name1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_toEndOf="@+id/iv_demo1"
+                android:text="Name of practice"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_muscle1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_name1"
+                android:layout_toRightOf="@+id/iv_demo1"
+                android:text=""
+                android:textStyle="italic" />
+
+            <techkids.com.android9_hackathon2_breakworkout.libraries.SmoothCheckBox
+                android:id="@+id/scb_done1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:clickable="false"
+                android:contextClickable="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:visibility="invisible"
+                app:color_checked="#fff"
+                app:color_tick="#3CBC5F"
+                app:color_unchecked="#d6d1d1"
+                app:color_unchecked_stroke="#bebaba" />
+
+            <ImageView
+                android:id="@+id/iv_done1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/ic_check_circle_black_24dp"
+                android:visibility="invisible" />
+        </RelativeLayout>
+
+        <ProgressBar
+            android:id="@+id/progress1"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="16dp"
+            android:layout_toRightOf="@+id/iv_play"
+            android:max="100"
+            android:progress="0" />
+
+
+        <RelativeLayout
+            android:id="@+id/rl_practice2"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="#2C8945"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/iv_demo2"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="16dp"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/tv_name2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="20dp"
+                android:layout_toEndOf="@+id/iv_demo2"
+                android:text="Name of practice"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_muscle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_name2"
+                android:layout_toRightOf="@+id/iv_demo2"
+                android:text=""
+                android:textStyle="italic" />
+
+            <techkids.com.android9_hackathon2_breakworkout.libraries.SmoothCheckBox
+                android:id="@+id/scb_done2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:clickable="false"
+                android:contextClickable="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:visibility="invisible"
+                app:color_checked="#fff"
+                app:color_tick="#3CBC5F"
+                app:color_unchecked="#d6d1d1"
+                app:color_unchecked_stroke="#bebaba" />
+
+            <ImageView
+                android:id="@+id/iv_done2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/ic_check_circle_black_24dp"
+                android:visibility="invisible" />
+        </RelativeLayout>
+
+
+        <ProgressBar
+            android:id="@+id/progress2"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="16dp"
+            android:layout_toRightOf="@+id/iv_play"
+            android:max="100"
+            android:progress="0" />
+
+        <ImageView
+            android:id="@+id/iv_boom"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_check_circle_black_24dp_copy" />
+    </LinearLayout>
+    <View
+        android:elevation="100dp"
+        android:id="@+id/v_touch"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+</RelativeLayout>

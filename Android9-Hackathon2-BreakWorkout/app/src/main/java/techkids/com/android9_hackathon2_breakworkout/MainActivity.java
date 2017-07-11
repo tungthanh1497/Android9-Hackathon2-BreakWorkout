@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import techkids.com.android9_hackathon2_breakworkout.soundPlayers.SoundPlayers;
 import techkids.com.android9_hackathon2_breakworkout.views.AlarmScreen;
 
 public class MainActivity extends AppCompatActivity {

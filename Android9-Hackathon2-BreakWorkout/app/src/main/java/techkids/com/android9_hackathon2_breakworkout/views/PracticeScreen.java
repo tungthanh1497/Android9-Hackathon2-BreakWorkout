@@ -18,12 +18,15 @@ import android.widget.Toast;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
 
+import java.util.HashMap;
+
 import io.github.douglasjunior.androidSimpleTooltip.SimpleTooltip;
 import pl.droidsonroids.gif.GifImageView;
 import techkids.com.android9_hackathon2_breakworkout.R;
 import techkids.com.android9_hackathon2_breakworkout.databases.DatabaseHandle;
 import techkids.com.android9_hackathon2_breakworkout.databases.PracticeModel;
 import techkids.com.android9_hackathon2_breakworkout.libraries.SmoothCheckBox;
+import techkids.com.android9_hackathon2_breakworkout.soundPlayers.SoundPlayers;
 
 public class PracticeScreen extends AppCompatActivity implements View.OnTouchListener, View.OnClickListener {
 
@@ -48,8 +51,8 @@ public class PracticeScreen extends AppCompatActivity implements View.OnTouchLis
     boolean isOpen = false;
     boolean isComfortable;
     boolean isDone = false;
-
-    int numberTips=0;
+    int streamID = -1;
+    int numberTips = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +81,8 @@ public class PracticeScreen extends AppCompatActivity implements View.OnTouchLis
                     .build()
                     .show();
         }
+//        SoundPlayers.noteMap = new HashMap<>();
+//        SoundPlayers.loadSounds(this);
     }
 
     void addVarById() {
@@ -121,6 +126,9 @@ public class PracticeScreen extends AppCompatActivity implements View.OnTouchLis
                     break;
                 case MotionEvent.ACTION_UP:
                     if (isRuning) {
+//                        if (streamID != -1) {
+//                            SoundPlayers.soundPool.stop(streamID);
+//                        }
                         isRuning = false;
                         progressBar.setProgress(0);
                         ivStartButton.setImageResource(R.drawable.ic_play_circle_filled_black_24dp);
@@ -128,6 +136,7 @@ public class PracticeScreen extends AppCompatActivity implements View.OnTouchLis
 
                         countDownTimer.cancel();
                     } else {
+//                        streamID = SoundPlayers.playSound("2");
                         ivStartButton.setImageResource(R.drawable.ic_pause_circle_filled_black_24dp);
                         countDownTimer = new CountDownTimer(timeEnd, timeBreak) {
                             @Override
@@ -147,7 +156,9 @@ public class PracticeScreen extends AppCompatActivity implements View.OnTouchLis
                                 isRuning = false;
 //                                rbCounting.stopRippleAnimation();
 //                                startActivity(new Intent(PracticeScreen.this, FinishScreen.class));
-
+//                                if (streamID != -1) {
+//                                    SoundPlayers.soundPool.stop(streamID);
+//                                }
                                 isDone = true;
                                 onBackPressed();
 
@@ -165,6 +176,9 @@ public class PracticeScreen extends AppCompatActivity implements View.OnTouchLis
 
     @Override
     public void onBackPressed() {
+//        if (streamID != -1) {
+//            SoundPlayers.soundPool.stop(streamID);
+//        }
         super.onBackPressed();
         if (isDone) {
             if (ListPracticeScreen.isFirst) {

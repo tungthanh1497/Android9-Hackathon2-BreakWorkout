@@ -20,6 +20,7 @@ import android.widget.Toast;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import io.github.douglasjunior.androidSimpleTooltip.SimpleTooltip;
@@ -28,6 +29,7 @@ import techkids.com.android9_hackathon2_breakworkout.R;
 import techkids.com.android9_hackathon2_breakworkout.databases.DatabaseHandle;
 import techkids.com.android9_hackathon2_breakworkout.databases.PracticeModel;
 import techkids.com.android9_hackathon2_breakworkout.libraries.SmoothCheckBox;
+import techkids.com.android9_hackathon2_breakworkout.soundPlayers.SoundPlayers;
 import tyrantgit.explosionfield.ExplosionField;
 
 public class ListPracticeScreen extends AppCompatActivity implements View.OnClickListener {
@@ -51,6 +53,7 @@ public class ListPracticeScreen extends AppCompatActivity implements View.OnClic
     ProgressBar progressBar2;
     ImageView ivFinish;
     boolean finish;
+    View vTouch;
 
     static boolean isFirst;
 
@@ -67,6 +70,9 @@ public class ListPracticeScreen extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_practice_screen);
 
+//        SoundPlayers.noteMap = new HashMap<>();
+//        SoundPlayers.loadSounds(this);
+//        SoundPlayers.playSound("1");
         isComfortable = getIntent().getBooleanExtra("isComfortable", true);
         practiceModelList = new ArrayList<>();
         practiceModelList = DatabaseHandle.getInstance(this).getPractices(isComfortable);
@@ -74,6 +80,7 @@ public class ListPracticeScreen extends AppCompatActivity implements View.OnClic
         setUI();
         rlPractice1.setOnClickListener(this);
         rlPractice2.setOnClickListener(this);
+        vTouch.setOnClickListener(this);
         if (!FinishScreen.isFirttime2) {
             FinishScreen.isFirttime2 = true;
             new SimpleTooltip.Builder(this)
@@ -127,6 +134,7 @@ public class ListPracticeScreen extends AppCompatActivity implements View.OnClic
     }
 
     private void initViews() {
+        vTouch = findViewById(R.id.v_touch);
         ivDemo1 = (ImageView) findViewById(R.id.iv_demo1);
         tvName1 = (TextView) findViewById(R.id.tv_name1);
         tvMuscle1 = (TextView) findViewById(R.id.tv_muscle1);
@@ -157,6 +165,7 @@ public class ListPracticeScreen extends AppCompatActivity implements View.OnClic
                     .transparentOverlay(false)
                     .build()
                     .show();
+            vTouch.setVisibility(View.INVISIBLE);
             return;
         }
         if (v == rlPractice1 && ivDone1.getVisibility() == View.INVISIBLE) {
@@ -242,6 +251,7 @@ public class ListPracticeScreen extends AppCompatActivity implements View.OnClic
     protected void onResume() {
         super.onResume();
         if (ivDone1.getVisibility() == View.VISIBLE && ivDone2.getVisibility() == View.VISIBLE) {
+//            SoundPlayers.playSound("3");
             finishAll();
         }
 

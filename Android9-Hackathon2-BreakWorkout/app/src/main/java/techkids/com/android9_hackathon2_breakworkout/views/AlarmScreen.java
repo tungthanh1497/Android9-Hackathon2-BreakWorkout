@@ -284,6 +284,9 @@ public class AlarmScreen extends AppCompatActivity implements TextWatcher, View.
                             .show();
                     break;
             }
+            if(numberTips==2){
+                vTouch.setVisibility(View.INVISIBLE);
+            }
             return false;
         }
         if (v == btStartStop) {

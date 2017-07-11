@@ -8,6 +8,7 @@
     android:background="#3CBC5F"
     tools:context="techkids.com.android9_hackathon2_breakworkout.views.PracticeScreen">
     <View
+        android:elevation="100dp"
         android:id="@+id/v_touch"
         android:clickable="true"
         android:focusable="true"
