@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity
-            android:name=".views.AlarmScene"
+            android:name=".views.AlarmScreen"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,13 +19,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".views.PracticeScene"
+            android:name=".views.PracticeScreen"
             android:screenOrientation="portrait" />
-
         <activity
-            android:name=".views.FinishScene"
+            android:name=".views.FinishScreen"
             android:label="@string/title_activity_finish_scene"
             android:screenOrientation="portrait" />
+        <activity android:name=".views.ListPracticeScreen"></activity>
     </application>
 
 </manifest>

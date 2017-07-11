@@ -12,24 +12,28 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.jaredrummler.materialspinner.MaterialSpinner;
 
 import java.util.concurrent.TimeUnit;
 
 import techkids.com.android9_hackathon2_breakworkout.R;
 
-public class AlarmScene extends AppCompatActivity implements TextWatcher, View.OnTouchListener {
+public class AlarmScreen extends AppCompatActivity implements TextWatcher, View.OnTouchListener {
     private ProgressBar progressBarCircle;
     private EditText editTextMinute;
     private TextView textViewTime;
     private Button btStartStop;
     private CountDownTimer countDownTimer;
+    MaterialSpinner materialSpinner;
 
+    private static final String[] ANDROID_VERSIONS = {"Comfortable move","Restriction move"};
+    boolean isComfortable=true;
 
-    public static String TAG = AlarmScene.class.toString();
+    public static String TAG = AlarmScreen.class.toString();
 
     private long timeCountInMilliSeconds = 0;
 
@@ -68,7 +72,7 @@ public class AlarmScene extends AppCompatActivity implements TextWatcher, View.O
 
         initViews();
         initListeners();
-
+        materialSpinner.setItems(ANDROID_VERSIONS);
     }
 
     private void initViews() {
@@ -76,12 +80,21 @@ public class AlarmScene extends AppCompatActivity implements TextWatcher, View.O
         editTextMinute = (EditText) findViewById(R.id.editTextMinute);
         textViewTime = (TextView) findViewById(R.id.textViewTime);
         btStartStop = (Button) findViewById(R.id.imageViewStartStop);
+        materialSpinner = (MaterialSpinner) findViewById(R.id.ms_eviroment);
     }
 
     private void initListeners() {
 //        btStartStop.setOnClickListener(this);
         btStartStop.setOnTouchListener(this);
         editTextMinute.addTextChangedListener(this);
+        materialSpinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+            @Override public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+                if(position==1){
+                    isComfortable=false;
+                }
+                else isComfortable=true;
+            }
+        });
     }
 
 
@@ -102,7 +115,7 @@ public class AlarmScene extends AppCompatActivity implements TextWatcher, View.O
 
             btStartStop.setText("STOP");
             btStartStop.setBackgroundResource(R.drawable.rounded_button_red);
-            btStartStop.setTextColor(Color.parseColor("#ff0000"));
+            btStartStop.setTextColor(Color.parseColor("#E783A5"));
             // making edit text not editable
             editTextMinute.setVisibility(View.INVISIBLE);
             // changing the timer status to started
@@ -110,7 +123,7 @@ public class AlarmScene extends AppCompatActivity implements TextWatcher, View.O
 
         } else {
             btStartStop.setText("START");
-            btStartStop.setTextColor(Color.parseColor("#6EC05D"));
+            btStartStop.setTextColor(Color.parseColor("#3CBC5F"));
             btStartStop.setBackgroundResource(R.drawable.rounded_button_green);
             editTextMinute.setVisibility(View.VISIBLE);
             textViewTime.setText(hmsTimeFormatter(0));
@@ -159,7 +172,10 @@ public class AlarmScene extends AppCompatActivity implements TextWatcher, View.O
             @Override
             public void onFinish() {
                 progressBarCircle.setProgress(0);
-                startActivity(new Intent(AlarmScene.this, PracticeScene.class));
+//              TODO:  Intent intent = new Intent(AlarmScreen.this, PracticeScreen.class);
+                Intent intent = new Intent(AlarmScreen.this, ListPracticeScreen.class);
+                intent.putExtra("isComfortable", isComfortable);
+                startActivity(intent);
                 editTextMinute.setVisibility(View.INVISIBLE);
 //                textViewTime.setText(hmsTimeFormatter(timeCountInMilliSeconds));
 //                setProgressBarValues();

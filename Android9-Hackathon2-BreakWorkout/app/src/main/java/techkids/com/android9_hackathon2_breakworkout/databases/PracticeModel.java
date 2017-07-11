@@ -42,6 +42,7 @@ public class PracticeModel implements Serializable {
                 ", leg=" + leg +
                 ", body=" + body +
                 ", environment=" + environment +
+                ", image=" +image+
                 '}';
     }
 

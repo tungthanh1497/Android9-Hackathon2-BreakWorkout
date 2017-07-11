@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#6EC05D"
-    tools:context="techkids.com.android9_hackathon2_breakworkout.views.FinishScene">
+    android:background="#3CBC5F"
+    tools:context="techkids.com.android9_hackathon2_breakworkout.views.FinishScreen">
 
     <ImageView
         android:id="@+id/iv_boom"
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:layout_centerInParent="true"
-        android:src="@drawable/success1" />
+        android:src="@drawable/ic_check_circle_black_24dp" />
     <!--<ImageView-->
     <!--android:id="@+id/iv_boom"-->
     <!--android:layout_width="250dp"-->

@@ -6,20 +6,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#6EC05D"
-    tools:context="techkids.com.android9_hackathon2_breakworkout.views.PracticeScene">
+    android:background="#3CBC5F"
+    tools:context="techkids.com.android9_hackathon2_breakworkout.views.PracticeScreen">
 
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:background="#65b355"
+        android:background="#2C8945"
         android:gravity="center"
         android:text="Name of practice"
         android:textColor="#fff"
         android:textSize="32sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"/>
 
     <android.support.v7.widget.CardView
         android:id="@+id/cv_image"
@@ -59,7 +60,7 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#6EC05D"
+            android:background="#2C8945"
             android:padding="8dp">
 
             <ImageView
@@ -122,16 +123,16 @@
     <!--android:textColor="#fff"-->
     <!--android:textSize="24sp"-->
     <!--android:textStyle="bold" />-->
-
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/cv_count_down">
+        android:layout_below="@+id/cv_count_down"
+        android:layout_marginTop="16dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#65b355"
+            android:background="#2C8945"
             android:padding="8dp">
 
             <Button
@@ -140,7 +141,7 @@
                 android:layout_height="wrap_content"
                 android:background="#fff"
                 android:text="How to do       "
-                android:textColor="#6EC05D"
+                android:textColor="#3CBC5F"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -158,7 +159,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/bt_how"
-                android:background="#65b355"
+                android:background="#2C8945"
                 app:el_duration="300"
                 app:el_expanded="true">
 

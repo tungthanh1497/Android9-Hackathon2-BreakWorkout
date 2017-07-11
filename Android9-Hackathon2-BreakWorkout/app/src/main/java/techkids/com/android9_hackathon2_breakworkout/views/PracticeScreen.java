@@ -1,27 +1,19 @@
 package techkids.com.android9_hackathon2_breakworkout.views;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Base64;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.github.aakira.expandablelayout.ExpandableWeightLayout;
-import com.github.lzyzsd.circleprogress.CircleProgress;
-import com.skyfishjy.library.RippleBackground;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
 
@@ -29,13 +21,14 @@ import pl.droidsonroids.gif.GifImageView;
 import techkids.com.android9_hackathon2_breakworkout.R;
 import techkids.com.android9_hackathon2_breakworkout.databases.DatabaseHandle;
 import techkids.com.android9_hackathon2_breakworkout.databases.PracticeModel;
+import techkids.com.android9_hackathon2_breakworkout.libraries.SmoothCheckBox;
 
-public class PracticeScene extends AppCompatActivity implements View.OnTouchListener, View.OnClickListener {
+public class PracticeScreen extends AppCompatActivity implements View.OnTouchListener, View.OnClickListener {
 
     //    TextView tvCountDown;
 //    RippleBackground rbCounting;
     boolean isRuning = false;
-    String TAG = PracticeScene.class.toString();
+    String TAG = PracticeScreen.class.toString();
     TextView tvName;
     ProgressBar progressBar;
     GifImageView givImage;
@@ -48,20 +41,25 @@ public class PracticeScene extends AppCompatActivity implements View.OnTouchList
     ExpandableLayout expandableLayout;
     ImageView ivDropDown;
     //    ExpandableWeightLayout expandableLayout;
-    long timeEnd = 10000;
+    long timeEnd = 3000;
     long timeBreak = 100;
     boolean isOpen = false;
-
+    boolean isComfortable;
+    boolean isDone = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_practice_scene);
 
+//        isComfortable = getIntent().getBooleanExtra("isComfortable", true);
+
+        PracticeModel practiceModel = (PracticeModel) getIntent().getExtras().getSerializable("showPractice");
+
+
         addVarById();
-        setupUI(DatabaseHandle.getInstance(this).getPractice());
-//        tvCountDown = (TextView) findViewById(R.id.tv_count_down);
-//        ivCenterImage.setOnTouchListener(this);
+//        setupUI(DatabaseHandle.getInstance(this).getPractice(isComfortable));
+        setupUI(practiceModel);
         ivStartButton.setOnTouchListener(this);
         btHow.setOnClickListener(this);
     }
@@ -89,7 +87,7 @@ public class PracticeScene extends AppCompatActivity implements View.OnTouchList
         if (practiceModel == null)
             return;
         tvName.setText(practiceModel.getName());
-        int resId = PracticeScene.this.getResources().getIdentifier(practiceModel.getImage(), "drawable", PracticeScene.this.getPackageName());
+        int resId = PracticeScreen.this.getResources().getIdentifier(practiceModel.getImage(), "drawable", PracticeScreen.this.getPackageName());
         givImage.setImageResource(resId);
         tvDescription.setText(practiceModel.getHow());
     }
@@ -132,7 +130,11 @@ public class PracticeScene extends AppCompatActivity implements View.OnTouchList
                                 progressBar.setProgress(100);
                                 isRuning = false;
 //                                rbCounting.stopRippleAnimation();
-                                startActivity(new Intent(PracticeScene.this, FinishScene.class));
+//                                startActivity(new Intent(PracticeScreen.this, FinishScreen.class));
+
+                                isDone = true;
+                                onBackPressed();
+
                             }
                         }.start();
                     }
@@ -145,28 +147,16 @@ public class PracticeScene extends AppCompatActivity implements View.OnTouchList
     }
 
 
-    boolean doubleBackToExitPressedOnce = false;
-
     @Override
     public void onBackPressed() {
-        if (doubleBackToExitPressedOnce) {
-            Intent intent = new Intent();
-            intent.setAction(Intent.ACTION_MAIN);
-            intent.addCategory(Intent.CATEGORY_HOME);
-            startActivity(intent);
-            return;
-        }
-
-        this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "Please click BACK again to go to Home Screen", Toast.LENGTH_SHORT).show();
-
-        new Handler().postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                doubleBackToExitPressedOnce = false;
+        super.onBackPressed();
+        if (isDone) {
+            if (ListPracticeScreen.isFirst) {
+                ListPracticeScreen.ivDone1.setVisibility(View.VISIBLE);
+            } else {
+                ListPracticeScreen.ivDone2.setVisibility(View.VISIBLE);
             }
-        }, 1000);
+        }
     }
 
     boolean showUp = true;

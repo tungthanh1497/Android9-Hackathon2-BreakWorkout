@@ -15,7 +15,7 @@ import android.widget.Toast;
 import techkids.com.android9_hackathon2_breakworkout.R;
 import tyrantgit.explosionfield.ExplosionField;
 
-public class FinishScene extends AppCompatActivity implements View.OnTouchListener {
+public class FinishScreen extends AppCompatActivity implements View.OnTouchListener {
 
     ImageView vBoom;
     boolean isclicked = false;
@@ -37,7 +37,7 @@ public class FinishScene extends AppCompatActivity implements View.OnTouchListen
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     public void run() {
-                        startActivity(new Intent(FinishScene.this, AlarmScene.class));
+                        startActivity(new Intent(FinishScreen.this, AlarmScreen.class));
                     }
                 }, 1000);
             }
@@ -57,7 +57,7 @@ public class FinishScene extends AppCompatActivity implements View.OnTouchListen
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     public void run() {
-                        startActivity(new Intent(FinishScene.this, AlarmScene.class));
+                        startActivity(new Intent(FinishScreen.this, AlarmScreen.class));
                     }
                 }, 1000);
             }
@@ -72,17 +72,17 @@ public class FinishScene extends AppCompatActivity implements View.OnTouchListen
         if (v == vBoom && !isclicked) {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
-                    vBoom.setImageResource(R.drawable.success1_clicked);
+                    vBoom.setImageResource(R.drawable.ic_check_circle_black_24dp_copy);
                     break;
                 case MotionEvent.ACTION_UP:
                     isclicked = true;
-                    vBoom.setImageResource(R.drawable.success1);
+                    vBoom.setImageResource(R.drawable.ic_check_circle_black_24dp);
                     ExplosionField explosionField = ExplosionField.attach2Window((Activity) context);
                     explosionField.explode(vBoom);
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         public void run() {
-                            startActivity(new Intent(FinishScene.this, AlarmScene.class));
+                            startActivity(new Intent(FinishScreen.this, AlarmScreen.class));
                         }
                     }, 1000);
                     break;
