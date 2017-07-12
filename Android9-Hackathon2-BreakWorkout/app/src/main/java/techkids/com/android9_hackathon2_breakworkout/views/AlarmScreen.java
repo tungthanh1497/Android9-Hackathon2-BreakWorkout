@@ -1,11 +1,18 @@
 package techkids.com.android9_hackathon2_breakworkout.views;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.RingtoneManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.NotificationCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Gravity;
@@ -14,7 +21,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +50,8 @@ public class AlarmScreen extends AppCompatActivity implements TextWatcher, View.
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
     }
+
+    Context context = this;
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -78,8 +86,8 @@ public class AlarmScreen extends AppCompatActivity implements TextWatcher, View.
         initListeners();
         materialSpinner.setItems(ANDROID_VERSIONS);
 
-        if(!FinishScreen.isFirttime1){
-            FinishScreen.isFirttime1=true;
+        if (!FinishScreen.isFirttime1) {
+            FinishScreen.isFirttime1 = true;
             new SimpleTooltip.Builder(this)
                     .anchorView(materialSpinner)
                     .text("Select your kind of work environment here")
@@ -88,8 +96,8 @@ public class AlarmScreen extends AppCompatActivity implements TextWatcher, View.
                     .transparentOverlay(false)
                     .build()
                     .show();
-        }else{
-            numberTips=3;
+        } else {
+            numberTips = 3;
         }
 
     }
@@ -194,9 +202,42 @@ public class AlarmScreen extends AppCompatActivity implements TextWatcher, View.
             public void onFinish() {
                 progressBarCircle.setProgress(0);
 //              TODO:  Intent intent = new Intent(AlarmScreen.this, PracticeScreen.class);
-                Intent intent = new Intent(AlarmScreen.this, ListPracticeScreen.class);
-                intent.putExtra("isComfortable", isComfortable);
-                startActivity(intent);
+
+
+//                Intent intent = new Intent(AlarmScreen.this, ListPracticeScreen.class);
+//                intent.putExtra("isComfortable", isComfortable);
+//                startActivity(intent);
+
+
+                NotificationCompat.Builder builder =
+                        (NotificationCompat.Builder) new NotificationCompat.Builder(context)
+                                .setSmallIcon(R.drawable.notification_icon)
+                                .setContentTitle("GetOffYoDesk has a notification")
+                                .setContentText("It's time to stop your work and take a breath");
+                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    builder.setSmallIcon(R.drawable.noti_icon);
+                } else {
+                    builder.setSmallIcon(R.drawable.notification_icon);
+                }
+                Uri alarmSound = Uri.parse("android.resource://" + getPackageName() + "/raw/notify");
+                builder.setSound(alarmSound);
+
+                Intent notificationIntent = new Intent(AlarmScreen.this, ListPracticeScreen.class);
+                notificationIntent.putExtra("isComfortable", isComfortable);
+                PendingIntent contentIntent = PendingIntent.getActivity(AlarmScreen.this, 0, notificationIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT);
+
+                builder.setContentIntent(contentIntent);
+                builder.setAutoCancel(true);
+                builder.setLights(Color.BLUE, 500, 500);
+                long[] pattern = {500, 500, 500, 500, 500, 500, 500, 500, 500};
+                builder.setVibrate(pattern);
+                builder.setStyle(new NotificationCompat.InboxStyle());
+// Add as notification
+                NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                manager.notify(1, builder.build());
+
+
                 editTextMinute.setVisibility(View.INVISIBLE);
 //                textViewTime.setText(hmsTimeFormatter(timeCountInMilliSeconds));
 //                setProgressBarValues();
@@ -284,7 +325,7 @@ public class AlarmScreen extends AppCompatActivity implements TextWatcher, View.
                             .show();
                     break;
             }
-            if(numberTips==2){
+            if (numberTips == 2) {
                 vTouch.setVisibility(View.INVISIBLE);
             }
             return false;
